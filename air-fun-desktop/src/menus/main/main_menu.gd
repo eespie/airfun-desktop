@@ -11,4 +11,6 @@ func _on_quit_pressed() -> void:
 
 
 func _on_random_fun_pressed() -> void:
-	EventBus.sigChangeScene.emit("res://src/core/main_game/main_game.tscn")
+	Global.game_mode = "random_fun"
+	# res://src/core/main_game/main_game.tscn
+	EventBus.sigChangeScene.emit("uid://dpx5o0r55oxb7")

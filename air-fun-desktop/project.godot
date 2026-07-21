@@ -19,8 +19,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventBus="*uid://dvouca3lpmilt"
-Scene="*uid://cd5pxp5o6a0jk"
 Global="*uid://n1t6mixnakxm"
+File="*uid://d1tkxsqqjxnas"
+GameInfo="*uid://bg6vojqcdie07"
+Sound="*uid://cq7k6hni6j3iv"
+Scene="*uid://cd5pxp5o6a0jk"
 
 [display]
 
@@ -38,6 +41,16 @@ version_control/autoload_on_startup=true
 
 theme/custom="uid://ducfept6pmkkm"
 theme/custom_font="uid://vv777y555brd"
+
+[input]
+
+Pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
+]
+}
 
 [physics]
 

@@ -6,9 +6,9 @@ var current_scene: Node
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
-	bind_events()
+	_bind_events()
 	
-func bind_events() -> void:
+func _bind_events() -> void:
 	EventBus.sigChangeScene.connect(_on_change_scene, CONNECT_DEFERRED)
 
 func _on_change_scene(path: String) -> void:
