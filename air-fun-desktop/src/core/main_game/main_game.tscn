@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dpx5o0r55oxb7"]
+
+[ext_resource type="Script" uid="uid://bh4ilu3n5jjji" path="res://src/core/main_game/main_game.gd" id="1_3fed5"]
+
+[node name="MainGame" type="Node2D" unique_id=1493276912]
+script = ExtResource("1_3fed5")
+
+[node name="Systems" type="Node" parent="." unique_id=156692060]
+
+[node name="World" type="Node2D" parent="." unique_id=1143006950]
+process_mode = 1
+
+[node name="LevelRoot" type="Node2D" parent="World" unique_id=1361817501]
+unique_name_in_owner = true
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=1523712733]
+process_mode = 1
+layer = 10
+
+[node name="HudRoot" type="Control" parent="HudLayer" unique_id=661309005]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=264368496]
+process_mode = 2
+layer = 20
+
+[node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=439224571]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

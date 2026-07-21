@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cg4nt0v8d1n8f"]
+
+[ext_resource type="PackedScene" uid="uid://0lsrcisgq683" path="res://src/core/common/background/background.tscn" id="1_cput1"]
+[ext_resource type="Script" uid="uid://cca8viivah3ne" path="res://src/menus/main/main_menu.gd" id="1_d31rl"]
+[ext_resource type="Script" uid="uid://b31pawejip14h" path="res://src/menus/main/game_version.gd" id="3_87ivk"]
+[ext_resource type="Script" uid="uid://cx6mptn3mth17" path="res://src/menus/main/godot_version.gd" id="4_153ft"]
+
+[node name="MainMenu" type="Control" unique_id=1036254314]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d31rl")
+
+[node name="Background" parent="." unique_id=1997383673 instance=ExtResource("1_cput1")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Background" unique_id=761426157]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Background/MarginContainer" unique_id=1288519075]
+layout_mode = 2
+size_flags_vertical = 0
+theme_type_variation = &"LabelTitle"
+text = "Air Fun"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credit" type="Label" parent="Background/MarginContainer" unique_id=1024607944]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Made by Eric Espie"
+
+[node name="VBoxVersion" type="VBoxContainer" parent="Background/MarginContainer" unique_id=940892910]
+modulate = Color(0.6789437, 0.6789437, 0.6789437, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="GameVersion" type="Label" parent="Background/MarginContainer/VBoxVersion" unique_id=515916559]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"LabelSmall"
+text = "Game version"
+script = ExtResource("3_87ivk")
+
+[node name="GodotVersion" type="Label" parent="Background/MarginContainer/VBoxVersion" unique_id=1189023905]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"LabelSmall"
+text = "Godot version"
+script = ExtResource("4_153ft")
+
+[node name="Anchor" type="Control" parent="Background/MarginContainer" unique_id=2059583256]
+layout_mode = 2
+
+[node name="VBoxButtons" type="VBoxContainer" parent="Background/MarginContainer/Anchor" unique_id=572089881]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RandomFun" type="Button" parent="Background/MarginContainer/Anchor/VBoxButtons" unique_id=1513510758]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+text = "Random Fun"
+
+[node name="AirportFun" type="Button" parent="Background/MarginContainer/Anchor/VBoxButtons" unique_id=1682693940]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Airport Fun"
+
+[node name="Quit" type="Button" parent="Background/MarginContainer/Anchor/VBoxButtons" unique_id=347186199]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Quit"

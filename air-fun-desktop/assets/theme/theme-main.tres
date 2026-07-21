@@ -1,0 +1,21 @@
+[gd_resource type="Theme" format=3 uid="uid://ducfept6pmkkm"]
+
+[ext_resource type="FontFile" uid="uid://vv777y555brd" path="res://assets/fonts/pablo-impallari_dosis/Dosis-Bold.ttf" id="1_hm15c"]
+
+[resource]
+default_font = ExtResource("1_hm15c")
+default_font_size = 20
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_hm15c")
+CheckButton/font_sizes/font_size = 30
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_hm15c")
+LabelSmall/base_type = &"Label"
+LabelSmall/font_sizes/font_size = 30
+LabelTitle/base_type = &"Label"
+LabelTitle/font_sizes/font_size = 80
+MarginContainer/constants/margin_bottom = 50
+MarginContainer/constants/margin_left = 50
+MarginContainer/constants/margin_right = 50
+MarginContainer/constants/margin_top = 50
+VBoxContainer/constants/separation = 25

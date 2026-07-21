@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://0lsrcisgq683"]
+
+[ext_resource type="Script" uid="uid://cyppvkowlsnu0" path="res://scenes/games/common/background/background.gd" id="1_7ig2r"]
+
+[sub_resource type="Gradient" id="Gradient_l3lif"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.0395648, 0.176063, 0.432245, 0.684471, 0.727027, 0.759162, 1)
+colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.654902, 0.580392, 0.372549, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yokyi"]
+seed = 2
+frequency = 0.002
+fractal_lacunarity = 2.2
+fractal_weighted_strength = 0.33
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_555lb"]
+width = 1920
+height = 1080
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_yokyi")
+color_ramp = SubResource("Gradient_l3lif")
+
+[node name="Background" type="TextureRect" unique_id=1997383673 groups=["terrain"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_555lb")
+script = ExtResource("1_7ig2r")
+metadata/_edit_lock_ = true
