@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cko02oljhiby"]
+
+[ext_resource type="Script" uid="uid://d3ujcjxjjw5fb" path="res://src/ui/paused/paused.gd" id="1_ru41v"]
+[ext_resource type="AudioStream" uid="uid://cdw56dwl6eey" path="res://assets/sounds/switch_007.ogg" id="3_gbu7l"]
+
+[node name="Paused" type="Control" unique_id=437028351]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ru41v")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2029450466]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5294118)
+
+[node name="Title" type="Label" parent="." unique_id=1982910693]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -49.0
+offset_top = 100.0
+offset_right = 49.0
+offset_bottom = 142.0
+grow_horizontal = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 100
+text = "Paused"
+
+[node name="Instructions" type="Label" parent="." unique_id=1846132622]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -235.0
+offset_top = 250.0
+offset_right = 235.0
+offset_bottom = 298.0
+grow_horizontal = 2
+text = "Press START, P, or ESC to resume."
+horizontal_alignment = 1
+
+[node name="PauseOptions" type="VBoxContainer" parent="." unique_id=1647897304 node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut_context = NodePath("Resume")
+alignment = 1
+
+[node name="Resume" type="Button" parent="PauseOptions" unique_id=708925260]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="PauseOptions" unique_id=580783541]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="PauseOptions" unique_id=738215428]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Quit"
+
+[node name="PauseSFX" type="AudioStreamPlayer2D" parent="." unique_id=817055634]
+stream = ExtResource("3_gbu7l")
+
+[connection signal="pressed" from="PauseOptions/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseOptions/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="PauseOptions/Quit" to="." method="_on_quit_pressed"]

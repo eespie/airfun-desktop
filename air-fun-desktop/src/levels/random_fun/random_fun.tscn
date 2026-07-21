@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://tos5wickywea"]
+
+[ext_resource type="PackedScene" uid="uid://0lsrcisgq683" path="res://src/core/common/background/background.tscn" id="2_e31ny"]
+[ext_resource type="Script" uid="uid://dsjn8q5e8u1kf" path="res://src/levels/random_fun/random_fun.gd" id="2_ula52"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x2yg3"]
+radius = 5.0
+
+[node name="Game" type="Node2D" unique_id=1089304166]
+
+[node name="Screen" type="Control" parent="." unique_id=1855588014]
+propagate_maximum_size = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" parent="Screen" unique_id=1997383673 instance=ExtResource("2_e31ny")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Marker Top Left" type="Marker2D" parent="Screen" unique_id=1236138467]
+unique_name_in_owner = true
+position = Vector2(100, 150)
+
+[node name="Marker Bottom Left" type="Marker2D" parent="Screen" unique_id=196478023]
+unique_name_in_owner = true
+position = Vector2(100, 980)
+
+[node name="Marker Bottom Right" type="Marker2D" parent="Screen" unique_id=869874385]
+unique_name_in_owner = true
+position = Vector2(1820, 980)
+
+[node name="Marker Top Right" type="Marker2D" parent="Screen" unique_id=1731436795]
+unique_name_in_owner = true
+position = Vector2(1820, 150)
+
+[node name="RandomFun" type="Node2D" parent="." unique_id=770572122]
+script = ExtResource("2_ula52")
+
+[node name="Planes" type="Node2D" parent="RandomFun" unique_id=1598676824]
+unique_name_in_owner = true
+
+[node name="Mouse" type="StaticBody2D" parent="RandomFun" unique_id=1357731899]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RandomFun/Mouse" unique_id=1984306752]
+shape = SubResource("CircleShape2D_x2yg3")
+
+[node name="PlanePopTimer" type="Timer" parent="." unique_id=1551500021]
+wait_time = 2.0
+one_shot = true
+
+[node name="GameOverTimer" type="Timer" parent="." unique_id=160320059]
+
+[connection signal="timeout" from="PlanePopTimer" to="RandomFun" method="_on_plane_pop_timer_timeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
