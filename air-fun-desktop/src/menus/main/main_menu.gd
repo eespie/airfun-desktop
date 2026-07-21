@@ -8,3 +8,7 @@ func _ready() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_random_fun_pressed() -> void:
+	EventBus.sigChangeScene.emit("res://src/core/main_game/main_game.tscn")

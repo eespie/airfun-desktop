@@ -96,4 +96,5 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "Quit"
 
+[connection signal="pressed" from="Background/MarginContainer/Anchor/VBoxButtons/RandomFun" to="." method="_on_random_fun_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/Anchor/VBoxButtons/Quit" to="." method="_on_quit_pressed"]

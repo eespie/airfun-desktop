@@ -16,12 +16,23 @@ run/main_scene="uid://cg4nt0v8d1n8f"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EventBus="*uid://dvouca3lpmilt"
+Scene="*uid://cd5pxp5o6a0jk"
+Global="*uid://n1t6mixnakxm"
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
 
 [gui]
 
