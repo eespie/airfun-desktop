@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c4qclj41y431i"]
+
+[ext_resource type="Script" uid="uid://17nk1dsjdckb" path="res://src/entities/planes/plane/plane.gd" id="1_yra7y"]
+[ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="3_h6mec"]
+[ext_resource type="Script" uid="uid://co2miokqi8wwp" path="res://src/entities/planes/plane/select_plane.gd" id="4_yh0ff"]
+[ext_resource type="Script" uid="uid://bbkl118dq71ao" path="res://src/entities/planes/plane/highlight_plane.gd" id="4_yra7y"]
+[ext_resource type="PackedScene" uid="uid://dwe3jwnmr3wru" path="res://src/core/common/explosion/Explosion.tscn" id="5_akgv8"]
+
+[node name="Plane" type="Node2D" unique_id=1659998964]
+script = ExtResource("1_yra7y")
+
+[node name="Model" type="Node2D" parent="." unique_id=521545989]
+unique_name_in_owner = true
+
+[node name="Selection" type="Node2D" parent="." unique_id=1997001358]
+
+[node name="SelectPlane" type="Sprite2D" parent="Selection" unique_id=436668606 groups=["select"]]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_h6mec")
+script = ExtResource("4_yh0ff")
+
+[node name="HighlightPlane" type="Sprite2D" parent="Selection" unique_id=1350854297]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_h6mec")
+script = ExtResource("4_yra7y")
+
+[node name="Explosion" parent="Selection" unique_id=456194140 instance=ExtResource("5_akgv8")]

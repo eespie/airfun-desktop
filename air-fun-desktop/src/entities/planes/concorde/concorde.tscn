@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ohhdxxql7vpr"]
+
+[ext_resource type="Script" uid="uid://10qjngrkh3y3" path="res://src/entities/planes/concorde/concorde.gd" id="1_k6a1w"]
+[ext_resource type="Texture2D" uid="uid://ddbmpkcghoxks" path="res://assets/2D/planes/Concorde/concorde.png" id="2_bxg6i"]
+[ext_resource type="Script" uid="uid://2is5vd3c072u" path="res://src/entities/planes/plane/plane_warning_collision.gd" id="3_6hxn6"]
+[ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="3_onfqy"]
+[ext_resource type="Script" uid="uid://wtjnuv2e1rke" path="res://src/entities/planes/plane/warning.gd" id="5_8h57g"]
+[ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="6_fnnha"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nincr"]
+radius = 61.0
+
+[node name="Concorde" type="Area2D" unique_id=1442138919 groups=["plane"]]
+input_pickable = false
+script = ExtResource("1_k6a1w")
+plane_speed = 131
+plane_select_scale = 0.55
+
+[node name="PlaneImage" type="Sprite2D" parent="." unique_id=1267558543]
+unique_name_in_owner = true
+texture = ExtResource("2_bxg6i")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=21793851]
+polygon = PackedVector2Array(40, 2, 31, 3, 18, 3, -19, 19, -24, 19, -25, 2, -33, 2, -45, 0, -33, -2, -25, -2, -24, -19, -17, -19, 18, -3, 31, -3, 40, -2, 45, 0)
+
+[node name="PlaneWarning" type="Area2D" parent="." unique_id=974061832]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+script = ExtResource("3_6hxn6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaneWarning" unique_id=1640583249]
+shape = SubResource("CircleShape2D_nincr")
+
+[node name="Warning" type="Sprite2D" parent="PlaneWarning" unique_id=1415200672]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 0.337255, 0.270588, 1)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("3_onfqy")
+script = ExtResource("5_8h57g")
+
+[node name="WarningSFX" type="AudioStreamPlayer2D" parent="PlaneWarning/Warning" unique_id=952711208]
+stream = ExtResource("6_fnnha")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_entered" from="PlaneWarning" to="PlaneWarning" method="_on_area_entered"]
+[connection signal="area_exited" from="PlaneWarning" to="PlaneWarning" method="_on_area_exited"]

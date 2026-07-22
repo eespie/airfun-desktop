@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ckkvunftlok22"]
+
+[ext_resource type="Script" uid="uid://gqirjv5wppvk" path="res://src/entities/planes/a380/a380.gd" id="1_etaux"]
+[ext_resource type="Texture2D" uid="uid://dkc38xmntx5gt" path="res://assets/2D/planes/A380/A380.png" id="2_4scv2"]
+[ext_resource type="Script" uid="uid://2is5vd3c072u" path="res://src/entities/planes/plane/plane_warning_collision.gd" id="3_i3pb4"]
+[ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="4_tnvfq"]
+[ext_resource type="Script" uid="uid://wtjnuv2e1rke" path="res://src/entities/planes/plane/warning.gd" id="5_wfgjq"]
+[ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="6_1qgfg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tc6ud"]
+radius = 74.0
+
+[node name="A380" type="Area2D" unique_id=1442138919 groups=["plane"]]
+input_pickable = false
+script = ExtResource("1_etaux")
+plane_speed = 57
+plane_select_scale = 0.8
+
+[node name="PlaneImage" type="Sprite2D" parent="." unique_id=1267558543]
+unique_name_in_owner = true
+texture = ExtResource("2_4scv2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=21793851]
+polygon = PackedVector2Array(53, 2, 44, 6, 22, 6, -17, 56, -24, 57, -5, 7, -35, 4, -49, 22, -54, 22, -46, 2, -53, 0, -47, -2, -54, -22, -50, -23, -35, -5, -5, -7, -23, -57, -17, -58, 22, -7, 44, -6, 53, -2)
+
+[node name="PlaneWarning" type="Area2D" parent="." unique_id=70731014]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+script = ExtResource("3_i3pb4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaneWarning" unique_id=1913717868]
+shape = SubResource("CircleShape2D_tc6ud")
+
+[node name="Warning" type="Sprite2D" parent="PlaneWarning" unique_id=2120585851]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 0.337255, 0.270588, 1)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("4_tnvfq")
+script = ExtResource("5_wfgjq")
+
+[node name="WarningSFX" type="AudioStreamPlayer2D" parent="PlaneWarning/Warning" unique_id=935881795]
+stream = ExtResource("6_1qgfg")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_entered" from="PlaneWarning" to="PlaneWarning" method="_on_area_entered"]
+[connection signal="area_exited" from="PlaneWarning" to="PlaneWarning" method="_on_area_exited"]
