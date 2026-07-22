@@ -1,19 +1,16 @@
 extends Node2D
 
-@onready var path2D : Path2D = $Path2D
-@onready var pathFollow2D :PathFollow2D = $Path2D/PathFollow2D
-@onready var plane = $Path2D/PathFollow2D/PLane
-@onready var plane_warning = $Path2D/PathFollow2D/PlaneWarning
+@onready var path_2d : Path2D = %Path2D
+@onready var path_follow_2d: PathFollow2D = %PathFollow2D
 @onready var curve: Curve2D
-@onready var target = $Target
-@onready var trajectory = $Trajectory
-@onready var highlight_plane = %HighlightPlane
+@onready var target = %Target
+@onready var trajectory = %Trajectory
 @onready var plane_image = %PlaneImage
+@onready var plane: Node2D = %Plane
+
 @onready var plane_waiting_timer = %PlaneWaitingTimer
 
-var waiting_path : Array[Vector2]
-
-var plane_colors : Array[Color] = [
+const PLANE_COLORS = [
 	Color.CRIMSON,
 	Color.BLUE,
 	Color.GREEN,
@@ -25,6 +22,8 @@ var plane_colors : Array[Color] = [
 	Color.YELLOW,
 	Color.DEEP_PINK
 ]
+
+var waiting_path : Array[Vector2]
 
 var segment_length : float = 30
 var screen_center = Vector2(Global.WIDTH/2, Global.HEIGHT/2)
@@ -42,7 +41,7 @@ var last_vector: Vector2
 var plane_id :int = 0
 var plane_selected :int = 0
 
-enum PlaneState {WAITING, END_WAITING, RUNNING, CRASHED}
+enum PlaneState {NEW, WAITING, END_WAITING, RUNNING, CRASHED}
 var plane_state: PlaneState = PlaneState.WAITING
 
 var plane_warned = []
@@ -52,6 +51,7 @@ var border_limit = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	plane_state = PlaneState.NEW
 	plane_waiting_timer.start()
 	_bind_events()
 
@@ -66,21 +66,17 @@ func _bind_events():
 	EventBus.sigPlaneWarningEnd.connect(_on_plane_warning_end)
 
 func _process(delta):
-	if plane_state == PlaneState.CRASHED:
+	if plane_state == PlaneState.CRASHED or plane_state == PlaneState.NEW:
 		return
-		
-	if plane_state == PlaneState.WAITING:
-		highlight_plane.show()
-	else:
-		highlight_plane.hide()
-		
+	
+	plane.highlight(plane_state == PlaneState.WAITING)
 	var curve_len = curve.get_baked_length()
 	if curve_len < 2:
 		return
 	progress += delta * speed
 	while progress > curve_len:
 		progress -= curve_len
-	pathFollow2D.set_progress(progress)
+	path_follow_2d.set_progress(progress)
 
 	var current_transformation = curve.sample_baked_with_rotation(progress)
 	current_rotation = current_transformation.get_rotation()
@@ -108,22 +104,26 @@ func _process(delta):
 			trajectory.add_point(points[curve_index])
 			trajectory_progress = curve.get_closest_offset(points[curve_index])
 	
+func init(plane_id : int, plane_type : int, plane_pos : Vector2, target_pos : Vector2, waiting_path : Array[Vector2]):
+	var curr_color = PLANE_COLORS[plane_id % PLANE_COLORS.size()]
+	trajectory.modulate = curr_color
+
+	plane.set_model(plane_type)
+	plane.set_color(curr_color)
+	
+	target.set_position(target_pos)
+	target.set_color(curr_color)
+	
+	propagate_call("set_plane_id", [plane_id])
+
+	self.waiting_path = waiting_path
+	_build_waiting_circle(plane_pos)
+	
+	plane_state = PlaneState.WAITING
+
 
 func set_plane_id(id: int):
 	plane_id = id
-	
-func set_target_pos(pos: Vector2):
-	target.set_position(pos)
-	#var plane_color = Color.from_hsv(randf_range(0.0, 1.0), randf_range(0.5, 1.0), randf_range(0.8, 1.0))
-	var plane_color = plane_colors[plane_id % plane_colors.size()]
-	target.modulate = plane_color
-	plane_image.modulate = plane_color
-	highlight_plane.self_modulate = Color.WHITE
-	trajectory.modulate = plane_color
-	propagate_call("set_plane_id", [plane_id])
-	
-func set_plane_pos(pos:Vector2):
-	_build_waiting_circle(pos)
 
 func _build_waiting_circle(pos : Vector2):
 	plane_state = PlaneState.WAITING
@@ -132,7 +132,7 @@ func _build_waiting_circle(pos : Vector2):
 	curve = Curve2D.new()
 	curve.clear_points()
 	curve.bake_interval = segment_length
-	path2D.set_curve(curve)
+	path_2d.set_curve(curve)
 	
 	# build a waiting path
 	curve.add_point(pos)
@@ -150,10 +150,7 @@ func _build_waiting_circle(pos : Vector2):
 	progress = 0
 
 	# Ignore collisions
-	plane.monitorable = false
-	plane.monitoring = false
-	plane_warning.monitorable = false
-	plane_warning.monitoring = false
+	plane.allow_collisions(false)
 
 func _smooth():
 	var point_count = curve.get_point_count()
@@ -196,23 +193,21 @@ func _on_mouse_button_clicked(mouse: Vector2):
 	
 	_select(true)
 	# Allow collisions
-	plane.monitorable = true
-	plane.monitoring = true
-	plane_warning.monitorable = true
-	plane_warning.monitoring = true
+	plane.allow_collisions(true)
+
 	plane_state = PlaneState.RUNNING
 	var plane_pos = current_position
 	curve = Curve2D.new()
 	curve.clear_points()
 	curve.bake_interval = segment_length
-	path2D.set_curve(curve)
+	path_2d.set_curve(curve)
 	
 	curve.add_point(plane_pos)
 	last_point = mouse
 	last_vector = plane_pos.direction_to(mouse)
 	#curve.add_point(last_point)
 	_smooth()
-	pathFollow2D.set_loop(false)
+	path_follow_2d.set_loop(false)
 	progress = 0.0
 
 
@@ -264,8 +259,5 @@ func _on_planeaiting_timer_timeout() -> void:
 	if plane_state != PlaneState.WAITING:
 		return
 	# Allow collisions
-	plane.monitorable = true
-	plane.monitoring = true
-	plane_warning.monitorable = true
-	plane_warning.monitoring = true
+	plane.allow_collisions(true)
 	plane_state = PlaneState.END_WAITING

@@ -11,7 +11,7 @@ func bind_events() -> void:
 	EventBus.sigNewGame.connect(_on_new_game)
 
 func display_high_score() -> void:
-	text = "HighScore " + str(high_score)
+	text = "HighScore " + str(floori(high_score))
 
 func _on_new_game(mode_name: String) ->void:
 	game_name = mode_name

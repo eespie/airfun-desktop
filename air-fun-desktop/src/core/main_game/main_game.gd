@@ -1,4 +1,3 @@
-class_name MainGame
 extends Node2D
 
 @onready var level_root: Node2D = %LevelRoot
