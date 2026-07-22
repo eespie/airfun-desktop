@@ -13,6 +13,7 @@ const PLANE_MODELS = [A_321, A_380, CONCORDE, Q_400]
 
 var plane_id :int = 0
 var plane_model
+var plane_speed : float
 
 func _ready() -> void:
 	_bind_events()
@@ -32,7 +33,7 @@ func set_model(type : int):
 	model.add_child(plane_model)
 	select_plane.scale = Vector2(plane_model.plane_select_scale, plane_model.plane_select_scale)
 	highlight_plane.scale = Vector2(plane_model.plane_select_scale, plane_model.plane_select_scale)
-	
+	plane_speed = floorf(plane_model.plane_speed)
 
 func allow_collisions(flag : bool):
 	plane_model.allow_collisions(flag)

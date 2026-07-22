@@ -4,15 +4,9 @@ var plane_path_scene: PackedScene = preload("uid://drmf6emnmt2pd")
 @export var margin :int = 200
 @export var min_travel :int = 300
 
-@onready var waiting_markers : Array[Marker2D] = [
-	%"Marker Top Right",
-	%"Marker Top Left",
-	%"Marker Bottom Left",
-	%"Marker Bottom Right",
-	%"Marker Top Right"
-]
 
 @onready var terrain: TextureRect = %Background
+@onready var waiting_marks: Node2D = %WaitingMarks
 
 var plane_id :int = 0
 var plane_count : int = 0
@@ -26,8 +20,8 @@ var waiting_path : Array[Vector2]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_bind_events()
-	for i in waiting_markers.size():
-		waiting_path.append(waiting_markers[i].global_position)
+	for mark in waiting_marks.get_children():
+		waiting_path.append(mark.global_position)
 
 func _bind_events():
 	EventBus.sigMouseDrag.connect(_on_mouse_drag)
@@ -68,9 +62,16 @@ func get_new_plane_type() -> int:
 	# use plane_count
 	return randi_range(0, 3)
 
+func get_max_plane_count() -> int:
+	# use plane_count
+	return floori(1 + plane_count / 2)
+
+func get_plane_pop_timer_value() -> float:
+	return 1 + 5 / plane_count
+
 func _on_plane_pop_timer_timeout():
-	if plane_count > 5:
-		EventBus.sigNewPlaneTimer.emit(randf_range(0.1, 2.0))
+	if plane_count > get_max_plane_count():
+		EventBus.sigNewPlaneTimer.emit(randf_range(0.1, get_plane_pop_timer_value()))
 		return
 		
 	plane_id += 1
@@ -84,12 +85,12 @@ func _on_plane_pop_timer_timeout():
 	planes.add_child(plane_path)
 	plane_path.init(plane_id, plane_type, plane_pos, target_pos, waiting_path)
 	
-	EventBus.sigNewPlaneTimer.emit(randf_range(5, 10))
+	EventBus.sigNewPlaneTimer.emit(randf_range(0.1, get_plane_pop_timer_value()))
 
 func _on_plane_arrived(_id: int):
 	EventBus.sigAddScore.emit(1)
 	plane_count -= 1
-	EventBus.sigNewPlaneTimer.emit(randf_range(0.1, 2.0))
+	EventBus.sigNewPlaneTimer.emit(randf_range(0.1, get_plane_pop_timer_value()))
 
 func _on_plane_crashed(_id: int):
 	EventBus.sigGameOver.emit()

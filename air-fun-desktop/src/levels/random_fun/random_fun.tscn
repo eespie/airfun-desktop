@@ -29,21 +29,44 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Marker Top Left" type="Marker2D" parent="Screen" unique_id=1236138467]
+[node name="WaitingMarks" type="Node2D" parent="Screen" unique_id=1660486090]
 unique_name_in_owner = true
-position = Vector2(100, 150)
 
-[node name="Marker Bottom Left" type="Marker2D" parent="Screen" unique_id=196478023]
-unique_name_in_owner = true
-position = Vector2(100, 980)
+[node name="Marker Top Left" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1236138467]
+position = Vector2(150, 150)
 
-[node name="Marker Bottom Right" type="Marker2D" parent="Screen" unique_id=869874385]
-unique_name_in_owner = true
-position = Vector2(1820, 980)
+[node name="Marker Top Left2" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1035607534]
+position = Vector2(100, 200)
 
-[node name="Marker Top Right" type="Marker2D" parent="Screen" unique_id=1731436795]
-unique_name_in_owner = true
-position = Vector2(1820, 150)
+[node name="Marker Left" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1240392455]
+position = Vector2(100, 540)
+
+[node name="Marker Bottom Left" type="Marker2D" parent="Screen/WaitingMarks" unique_id=196478023]
+position = Vector2(100, 930)
+
+[node name="Marker Bottom Left2" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1165814464]
+position = Vector2(150, 980)
+
+[node name="Marker Bottom" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1236096045]
+position = Vector2(960, 980)
+
+[node name="Marker Bottom Right" type="Marker2D" parent="Screen/WaitingMarks" unique_id=869874385]
+position = Vector2(1770, 980)
+
+[node name="Marker Bottom Right2" type="Marker2D" parent="Screen/WaitingMarks" unique_id=196608228]
+position = Vector2(1820, 930)
+
+[node name="Marker Right" type="Marker2D" parent="Screen/WaitingMarks" unique_id=537037078]
+position = Vector2(1820, 540)
+
+[node name="Marker Top Right" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1731436795]
+position = Vector2(1820, 200)
+
+[node name="Marker Top Right2" type="Marker2D" parent="Screen/WaitingMarks" unique_id=550190303]
+position = Vector2(1770, 150)
+
+[node name="Marker Top Right3" type="Marker2D" parent="Screen/WaitingMarks" unique_id=1901263642]
+position = Vector2(960, 150)
 
 [node name="Planes" type="Node2D" parent="." unique_id=1598676824]
 unique_name_in_owner = true

@@ -8,20 +8,20 @@
 [ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="6_v2u5i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kmc6g"]
-radius = 35.0
+radius = 32.0
 
 [node name="Q400" type="Area2D" unique_id=1442138919 groups=["plane"]]
 input_pickable = false
 script = ExtResource("1_wrgg6")
-plane_speed = 40
-plane_select_scale = 0.3
+plane_speed = 35
+plane_select_scale = 0.35
 
 [node name="PlaneImage" type="Sprite2D" parent="." unique_id=1267558543]
 unique_name_in_owner = true
 texture = ExtResource("2_2r7lg")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=21793851]
-polygon = PackedVector2Array(24, 2, 20, 3, 5, 3, 4, 21, -1, 21, -2, 3, -18, 3, -19, 7, -24, 7, -24, -7, -19, -7, -18, -3, -2, -3, -1, -21, 4, -21, 5, -3, 20, -3, 24, -2)
+polygon = PackedVector2Array(26, 2, 20, 3, 5, 3, 4, 23, -1, 23, -2, 3, -20, 3, -21, 7, -26, 7, -26, -7, -21, -7, -20, -3, -2, -3, -1, -23, 4, -23, 5, -3, 20, -3, 26, -2)
 
 [node name="PlaneWarning" type="Area2D" parent="." unique_id=540917372]
 unique_name_in_owner = true

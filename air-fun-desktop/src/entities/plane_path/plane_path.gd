@@ -27,13 +27,12 @@ var waiting_path : Array[Vector2]
 
 var segment_length : float = 30
 var screen_center = Vector2(Global.WIDTH/2, Global.HEIGHT/2)
-var speed : float = 50
 var progress : float = 0.0
 # Progress on wait route
 var last_wait_progress : float
 var last_wait_time
 var selected : bool = false
-var current_rotation : float
+var current_position : Vector2
 # last point on curve
 var last_point: Vector2
 # last vector on curve
@@ -45,6 +44,8 @@ enum PlaneState {NEW, WAITING, END_WAITING, RUNNING, CRASHED}
 var plane_state: PlaneState = PlaneState.WAITING
 
 var plane_warned = []
+var plane_speed : float = 50.0
+
 var fuel :float = 60.0
 
 var border_limit = 50
@@ -73,14 +74,18 @@ func _process(delta):
 	var curve_len = curve.get_baked_length()
 	if curve_len < 2:
 		return
-	progress += delta * speed
+	progress += delta * plane_speed
 	while progress > curve_len:
-		progress -= curve_len
+		if plane_state == PlaneState.END_WAITING:
+			# recalculate waiting path
+			_build_waiting_circle(current_position)
+		else:
+			progress -= curve_len
 	path_follow_2d.set_progress(progress)
 
 	var current_transformation = curve.sample_baked_with_rotation(progress)
-	current_rotation = current_transformation.get_rotation()
-	var cur_pos = current_transformation.get_origin()
+	current_position = current_transformation.get_origin()
+	var cur_pos = current_position
 	
 	# Check screen boundaries
 	if cur_pos.x < border_limit or cur_pos.x > Global.WIDTH - border_limit or cur_pos.y < border_limit or cur_pos.y > Global.HEIGHT - border_limit:
@@ -119,6 +124,8 @@ func init(plane_id : int, plane_type : int, plane_pos : Vector2, target_pos : Ve
 	self.waiting_path = waiting_path
 	_build_waiting_circle(plane_pos)
 	
+	plane_speed = plane.plane_speed
+	
 	plane_state = PlaneState.WAITING
 
 
@@ -126,8 +133,6 @@ func set_plane_id(id: int):
 	plane_id = id
 
 func _build_waiting_circle(pos : Vector2):
-	plane_state = PlaneState.WAITING
-
 	# Reinint the curve
 	curve = Curve2D.new()
 	curve.clear_points()

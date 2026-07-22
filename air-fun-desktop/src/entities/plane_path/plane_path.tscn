@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="10_8j881"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjg8e"]
-radius = 51.351727
+radius = 9.0
 
 [node name="PlanePath" type="Node2D" unique_id=1484433052 groups=["plane_path"]]
 script = ExtResource("1_v7ur2")

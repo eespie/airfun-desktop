@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="6_fnnha"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nincr"]
-radius = 61.0
+radius = 54.00926
 
 [node name="Concorde" type="Area2D" unique_id=1442138919 groups=["plane"]]
 input_pickable = false
@@ -21,7 +21,7 @@ unique_name_in_owner = true
 texture = ExtResource("2_bxg6i")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=21793851]
-polygon = PackedVector2Array(40, 2, 31, 3, 18, 3, -19, 19, -24, 19, -25, 2, -33, 2, -45, 0, -33, -2, -25, -2, -24, -19, -17, -19, 18, -3, 31, -3, 40, -2, 45, 0)
+polygon = PackedVector2Array(40, 2, 31, 3, 16, 3, -15, 17, -21, 18, -23, 2, -32, 2, -43, 0, -32, -2, -23, -2, -21, -18, -14, -16, 16, -3, 31, -3, 40, -2, 45, 0)
 
 [node name="PlaneWarning" type="Area2D" parent="." unique_id=974061832]
 unique_name_in_owner = true
