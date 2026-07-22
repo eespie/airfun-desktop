@@ -21,6 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" parent="Screen" unique_id=1997383673 instance=ExtResource("2_e31ny")]
+unique_name_in_owner = true
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -58,10 +59,12 @@ shape = SubResource("CircleShape2D_x2yg3")
 [node name="System" type="Node2D" parent="." unique_id=1089304166]
 
 [node name="PlanePopTimer" type="Timer" parent="System" unique_id=1551500021]
+unique_name_in_owner = true
 wait_time = 2.0
 one_shot = true
 
 [node name="GameOverTimer" type="Timer" parent="System" unique_id=160320059]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="System/PlanePopTimer" to="." method="_on_plane_pop_timer_timeout"]
 [connection signal="timeout" from="System/GameOverTimer" to="System" method="_on_game_over_timer_timeout"]

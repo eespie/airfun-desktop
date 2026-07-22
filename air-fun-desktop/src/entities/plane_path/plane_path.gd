@@ -11,8 +11,6 @@ extends Node2D
 @onready var plane_image = %PlaneImage
 @onready var plane_waiting_timer = %PlaneWaitingTimer
 
-@export var waiting_radius :float = 50.0
-
 var waiting_path : Array[Vector2]
 
 var plane_colors : Array[Color] = [
@@ -125,9 +123,9 @@ func set_target_pos(pos: Vector2):
 	propagate_call("set_plane_id", [plane_id])
 	
 func set_plane_pos(pos:Vector2):
-	_build_waiting_circle()
+	_build_waiting_circle(pos)
 
-func _build_waiting_circle():
+func _build_waiting_circle(pos : Vector2):
 	plane_state = PlaneState.WAITING
 
 	# Reinint the curve
@@ -137,10 +135,19 @@ func _build_waiting_circle():
 	path2D.set_curve(curve)
 	
 	# build a waiting path
+	curve.add_point(pos)
+	var nearest_point : int = -1
+	# squared hypotenuse
+	var nearest_distance : float = Global.WIDTH * Global.WIDTH + Global.HEIGHT * Global.HEIGHT
 	for i in waiting_path.size():
-		curve.add_point(waiting_path[i])
+		if pos.distance_squared_to(waiting_path[i]) < nearest_distance:
+			nearest_distance = pos.distance_squared_to(waiting_path[i])
+			nearest_point = i
+	for i in waiting_path.size():
+		curve.add_point(waiting_path[nearest_point % waiting_path.size()])
+		nearest_point += 1
 	_smooth()
-	progress = randf() * curve.get_baked_length()
+	progress = 0
 
 	# Ignore collisions
 	plane.monitorable = false
@@ -212,11 +219,10 @@ func _on_mouse_button_clicked(mouse: Vector2):
 func _on_mouse_button_released(_mouse: Vector2):
 	if not selected:
 		return
-
+	# Abort current trajectory and return to waiting circle
 	_select(false)
-	_build_waiting_circle()
-	var off_delta = (Time.get_ticks_usec() - last_wait_time) / 100000000.0
-	progress = last_wait_progress + off_delta * speed
+	var current_position = curve.sample_baked(progress)
+	_build_waiting_circle(current_position)
 	
 func _on_mouse_drag(mouse: Vector2):
 	if not selected:

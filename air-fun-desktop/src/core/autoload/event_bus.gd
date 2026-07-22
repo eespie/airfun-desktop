@@ -11,7 +11,7 @@ extends Node
 @warning_ignore("unused_signal") signal sigNewHighScore(points :int)
 
 # Planes
-@warning_ignore("unused_signal") signal sigNewPlanePop()
+@warning_ignore("unused_signal") signal sigNewPlaneTimer()
 @warning_ignore("unused_signal") signal sigPlaneCrashed(game :Node2D)
 @warning_ignore("unused_signal") signal sigPlaneArrived(id :int)
 @warning_ignore("unused_signal") signal sigPlaneSelect(selected :bool, id :int)

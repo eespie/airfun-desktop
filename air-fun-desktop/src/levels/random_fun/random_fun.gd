@@ -9,7 +9,8 @@ var plane_path_scene: PackedScene = preload("uid://drmf6emnmt2pd")
 	%"Marker Bottom Right",
 	%"Marker Top Right"
 ]
-var terrain :TextureRect
+
+@onready var terrain: TextureRect = %Background
 
 var plane_id :int = 0
 var plane_count : int = 0
@@ -18,19 +19,21 @@ var waiting_path : Array[Vector2]
 @onready var mouse = %Mouse
 @onready var planes = %Planes
 
+@onready var plane_pop_timer: Timer = %PlanePopTimer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	terrain = get_tree().get_first_node_in_group("terrain")
+	_bind_events()
 	for i in waiting_markers.size():
 		waiting_path.append(waiting_markers[i].global_position)
-	bind_events()
 
-func bind_events():
+func _bind_events():
 	EventBus.sigMouseDrag.connect(_on_mouse_drag)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
 	EventBus.sigPlaneCrashed.connect(_on_plane_crashed)
+	EventBus.sigNewPlaneTimer.connect(_on_new_plane_timer)
 
 func _on_mouse_drag(mouse: Vector2i):
 	self.mouse.position = mouse
@@ -38,7 +41,6 @@ func _on_mouse_drag(mouse: Vector2i):
 func _on_mouse_button_clicked(mouse: Vector2i):
 	self.mouse.position = mouse
 		
-	
 func _on_mouse_button_released(_mouse: Vector2i):
 	self.mouse.position = Vector2(-100, -100)
 
@@ -53,6 +55,10 @@ func get_target_pos() -> Vector2:
 		if color.g > color.r and color.g > color.b:
 			return target_pos
 	return Vector2(0, 0)
+
+func _on_new_plane_timer(wait: float):
+	if plane_pop_timer.is_stopped():
+		plane_pop_timer.start(wait)
 
 func _on_plane_pop_timer_timeout():
 	if plane_count > 5:
@@ -70,12 +76,12 @@ func _on_plane_pop_timer_timeout():
 	
 	var plane_pos = Vector2(randi_range(margin, Global.WIDTH - margin), randi_range(margin, Global.HEIGHT - margin));
 	plane_path.set_plane_pos(plane_pos)
-	EventBus.sigTimerNext.emit(randi_range(5, 10))
+	EventBus.sigNewPlaneTimer.emit(randf_range(5, 10))
 
 func _on_plane_arrived(_id: int):
 	EventBus.sigAddScore.emit(1)
 	plane_count -= 1
-	EventBus.sigTimerNext.emit(randf_range(0.1, 2.0))
+	EventBus.sigNewPlaneTimer.emit(randf_range(0.1, 2.0))
 
 func _on_plane_crashed(_id: int):
 	EventBus.sigGameOver.emit()

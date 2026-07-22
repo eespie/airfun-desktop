@@ -30,7 +30,7 @@ func _ready() -> void:
 	if GAME_MODES.has(Global.game_mode):
 		init_level(GAME_MODES[Global.game_mode])
 	EventBus.sigNewGame.emit(Global.game_mode)
-	EventBus.sigNewPlanePop.emit(initial_wait_time)
+	EventBus.sigNewPlaneTimer.emit(initial_wait_time)
 
 func _bind_events() -> void:
 	EventBus.sigGameOver.connect(_on_game_over)

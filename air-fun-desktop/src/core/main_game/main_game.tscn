@@ -14,21 +14,6 @@ process_mode = 1
 [node name="LevelRoot" type="Node2D" parent="World" unique_id=1361817501]
 unique_name_in_owner = true
 
-[node name="GameOverLayer" type="CanvasLayer" parent="." unique_id=1176563309]
-process_mode = 3
-layer = 5
-
-[node name="GameOverRoot" type="Control" parent="GameOverLayer" unique_id=751543909]
-unique_name_in_owner = true
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1523712733]
 process_mode = 1
 layer = 10
@@ -41,13 +26,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=264368496]
 process_mode = 2
 layer = 20
 
 [node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=439224571]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="GameOverLayer" type="CanvasLayer" parent="." unique_id=1176563309]
+process_mode = 3
+layer = 30
+
+[node name="GameOverRoot" type="Control" parent="GameOverLayer" unique_id=751543909]
 unique_name_in_owner = true
 visible = false
 layout_mode = 3
