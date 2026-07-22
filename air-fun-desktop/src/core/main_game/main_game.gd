@@ -67,8 +67,8 @@ func toggle_pause_game():
 	else:
 		pause_root.hide()
 
-func _on_game_paused(is_paused : bool):
-	self.is_paused = is_paused
+func _on_game_paused(paused : bool):
+	self.is_paused = paused
 	toggle_pause_game()
 
 

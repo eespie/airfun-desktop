@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqvnn2w00ddl1"]
 
-[ext_resource type="Theme" uid="uid://ducfept6pmkkm" path="res://assets/theme/theme-main.tres" id="1_tl53o"]
+[ext_resource type="Theme" uid="uid://ducfept6pmkkm" path="res://resources/theme/theme-main.tres" id="1_tl53o"]
 [ext_resource type="Script" uid="uid://bljura605mwja" path="res://src/ui/game_over/game_over.gd" id="2_hsany"]
 [ext_resource type="AudioStream" uid="uid://cdw56dwl6eey" path="res://assets/sounds/switch_007.ogg" id="4_uqhnn"]
 

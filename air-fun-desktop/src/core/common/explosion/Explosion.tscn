@@ -12,45 +12,46 @@
 [ext_resource type="Texture2D" uid="uid://bhbggerg8ucyl" path="res://assets/2D/explosion/explosion08.png" id="10_nbae6"]
 [ext_resource type="AudioStream" uid="uid://co60pmbr6h4ix" path="res://assets/sounds/mixkit-car-explosion-debris-1562.ogg" id="11_84s67"]
 
-[node name="Explosion" type="Node2D"]
+[node name="Explosion" type="Node2D" unique_id=1688022249]
 scale = Vector2(0.1, 0.1)
 script = ExtResource("1_v4bv1")
 
-[node name="Explosion00" type="Sprite2D" parent="."]
+[node name="Explosion00" type="Sprite2D" parent="." unique_id=82015864]
 visible = false
 texture = ExtResource("2_0lag2")
 
-[node name="Explosion01" type="Sprite2D" parent="."]
+[node name="Explosion01" type="Sprite2D" parent="." unique_id=625733043]
 visible = false
 texture = ExtResource("3_ed51b")
 
-[node name="Explosion02" type="Sprite2D" parent="."]
+[node name="Explosion02" type="Sprite2D" parent="." unique_id=1580318137]
 visible = false
 texture = ExtResource("4_52yxv")
 
-[node name="Explosion03" type="Sprite2D" parent="."]
+[node name="Explosion03" type="Sprite2D" parent="." unique_id=396765482]
 visible = false
 texture = ExtResource("5_c8u2a")
 
-[node name="Explosion04" type="Sprite2D" parent="."]
+[node name="Explosion04" type="Sprite2D" parent="." unique_id=2104595041]
 visible = false
 texture = ExtResource("6_56mm6")
 
-[node name="Explosion05" type="Sprite2D" parent="."]
+[node name="Explosion05" type="Sprite2D" parent="." unique_id=313937018]
 visible = false
 texture = ExtResource("7_8rd3b")
 
-[node name="Explosion06" type="Sprite2D" parent="."]
+[node name="Explosion06" type="Sprite2D" parent="." unique_id=1046795377]
 visible = false
 texture = ExtResource("8_icn40")
 
-[node name="Explosion07" type="Sprite2D" parent="."]
+[node name="Explosion07" type="Sprite2D" parent="." unique_id=776245958]
 visible = false
 texture = ExtResource("9_w84w2")
 
-[node name="Explosion08" type="Sprite2D" parent="."]
+[node name="Explosion08" type="Sprite2D" parent="." unique_id=244869726]
 visible = false
 texture = ExtResource("10_nbae6")
 
-[node name="ExplodeSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="ExplodeSFX" type="AudioStreamPlayer2D" parent="." unique_id=1572858684]
 stream = ExtResource("11_84s67")
+bus = &"SFX"

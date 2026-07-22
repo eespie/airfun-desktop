@@ -42,6 +42,7 @@ texture = ExtResource("4_fm50f")
 script = ExtResource("5_h1idv")
 
 [node name="WarningSFX" type="AudioStreamPlayer2D" parent="PlaneWarning/Warning" unique_id=447554728]
+unique_name_in_owner = true
 stream = ExtResource("6_v2u5i")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

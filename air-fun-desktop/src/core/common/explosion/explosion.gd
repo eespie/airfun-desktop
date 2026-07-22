@@ -43,7 +43,6 @@ func _process(delta):
 func _on_plane_crashed(id: int):
 	if plane_id != id:
 		return
-		
 	explode()
 
 func explode(duration: float = 0.5):

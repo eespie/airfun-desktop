@@ -5,7 +5,6 @@ extends Node2D
 @onready var curve: Curve2D
 @onready var target = %Target
 @onready var trajectory = %Trajectory
-@onready var plane_image = %PlaneImage
 @onready var plane: Node2D = %Plane
 
 @onready var plane_waiting_timer = %PlaneWaitingTimer
@@ -89,13 +88,9 @@ func _process(delta):
 	
 	# Check screen boundaries
 	if cur_pos.x < border_limit or cur_pos.x > Global.WIDTH - border_limit or cur_pos.y < border_limit or cur_pos.y > Global.HEIGHT - border_limit:
-		if plane_warned.find(plane_id) == -1:
-			EventBus.sigPlaneWarningStart.emit(plane_id)
 		if cur_pos.x < 0 or cur_pos.x > Global.WIDTH or cur_pos.y < 0 or cur_pos.y > Global.HEIGHT:
 			if plane_state != PlaneState.CRASHED:
 				EventBus.sigPlaneCrashed.emit(plane_id)
-	elif plane_warned.find(plane_id) != -1:
-		EventBus.sigPlaneWarningEnd.emit(plane_id)
 	
 	# Trajectory
 	trajectory.clear_points()
@@ -109,19 +104,19 @@ func _process(delta):
 			trajectory.add_point(points[curve_index])
 			trajectory_progress = curve.get_closest_offset(points[curve_index])
 	
-func init(plane_id : int, plane_type : int, plane_pos : Vector2, target_pos : Vector2, waiting_path : Array[Vector2]):
-	var curr_color = PLANE_COLORS[plane_id % PLANE_COLORS.size()]
+func init(id : int, type : int, plane_pos : Vector2, target_pos : Vector2, waiting : Array[Vector2]):
+	var curr_color = PLANE_COLORS[id % PLANE_COLORS.size()]
 	trajectory.modulate = curr_color
 
-	plane.set_model(plane_type)
+	plane.set_model(type)
 	plane.set_color(curr_color)
 	
 	target.set_position(target_pos)
 	target.set_color(curr_color)
 	
-	propagate_call("set_plane_id", [plane_id])
+	propagate_call("set_plane_id", [id])
 
-	self.waiting_path = waiting_path
+	self.waiting_path = waiting
 	_build_waiting_circle(plane_pos)
 	
 	plane_speed = plane.plane_speed
@@ -191,7 +186,6 @@ func _on_mouse_button_clicked(mouse: Vector2):
 	# save the progress on wait line
 	last_wait_progress = progress
 	last_wait_time = Time.get_ticks_usec()
-	var current_position = curve.sample_baked(progress)
 
 	if current_position.distance_to(mouse) > 32:
 		return # click did not hit plane
@@ -221,7 +215,7 @@ func _on_mouse_button_released(_mouse: Vector2):
 		return
 	# Abort current trajectory and return to waiting circle
 	_select(false)
-	var current_position = curve.sample_baked(progress)
+	plane_state = PlaneState.END_WAITING
 	_build_waiting_circle(current_position)
 	
 func _on_mouse_drag(mouse: Vector2):

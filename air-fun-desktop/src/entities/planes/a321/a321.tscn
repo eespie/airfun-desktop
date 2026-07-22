@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="6_l2lfu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1cnm1"]
-radius = 50.0
+radius = 47.0
 
 [node name="A321" type="Area2D" unique_id=1442138919 groups=["plane"]]
 input_pickable = false
@@ -42,9 +42,14 @@ texture = ExtResource("4_eqbhu")
 script = ExtResource("5_qma8f")
 
 [node name="WarningSFX" type="AudioStreamPlayer2D" parent="PlaneWarning/Warning" unique_id=1723586129]
+unique_name_in_owner = true
 stream = ExtResource("6_l2lfu")
+bus = &"SFX"
+parameters/looping = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
 [connection signal="area_entered" from="PlaneWarning" to="PlaneWarning" method="_on_area_entered"]
 [connection signal="area_exited" from="PlaneWarning" to="PlaneWarning" method="_on_area_exited"]
+[connection signal="area_shape_entered" from="PlaneWarning" to="PlaneWarning" method="_on_area_shape_entered"]
+[connection signal="area_shape_exited" from="PlaneWarning" to="PlaneWarning" method="_on_area_shape_exited"]
