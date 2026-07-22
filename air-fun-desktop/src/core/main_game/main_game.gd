@@ -2,7 +2,6 @@ class_name MainGame
 extends Node2D
 
 @onready var level_root: Node2D = %LevelRoot
-
 @onready var hud_root: Control = %HudRoot
 @onready var pause_root: Control = %PauseRoot
 @onready var game_over_root: Control = %GameOverRoot
@@ -10,6 +9,9 @@ extends Node2D
 const GAME_OVER = preload("uid://dqvnn2w00ddl1")
 const HUD = preload("uid://blw2kf0lenpx8")
 const PAUSED = preload("uid://cko02oljhiby")
+const RANDOM_FUN = preload("uid://tos5wickywea")
+
+const GAME_MODES = {'random_fun':RANDOM_FUN}
 
 var is_paused : bool = false
 
@@ -25,6 +27,8 @@ func _ready() -> void:
 	init_hud()
 	init_pause()
 	init_game_over()
+	if GAME_MODES.has(Global.game_mode):
+		init_level(GAME_MODES[Global.game_mode])
 	EventBus.sigNewGame.emit(Global.game_mode)
 	EventBus.sigNewPlanePop.emit(initial_wait_time)
 
@@ -45,6 +49,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("Pause"):
 		EventBus.sigPause.emit(not is_paused)
 		
+func init_level(game):
+	level_root.add_child(game.instantiate())
+
 func init_hud():
 	hud_root.add_child(HUD.instantiate())
 		
@@ -67,4 +74,7 @@ func _on_game_paused(is_paused : bool):
 
 
 func _on_game_over() -> void:
+	EventBus.sigPause.emit(true)
+	pause_root.hide()
 	game_over_root.show()
+	

@@ -30,6 +30,7 @@ func bind_events():
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
+	EventBus.sigPlaneCrashed.connect(_on_plane_crashed)
 
 func _on_mouse_drag(mouse: Vector2i):
 	self.mouse.position = mouse
@@ -75,3 +76,6 @@ func _on_plane_arrived(_id: int):
 	EventBus.sigAddScore.emit(1)
 	plane_count -= 1
 	EventBus.sigTimerNext.emit(randf_range(0.1, 2.0))
+
+func _on_plane_crashed(_id: int):
+	EventBus.sigGameOver.emit()

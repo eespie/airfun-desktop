@@ -6,7 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_x2yg3"]
 radius = 5.0
 
-[node name="Game" type="Node2D" unique_id=1089304166]
+[node name="RandomFun" type="Node2D" unique_id=770572122]
+script = ExtResource("2_ula52")
 
 [node name="Screen" type="Control" parent="." unique_id=1855588014]
 propagate_maximum_size = true
@@ -43,25 +44,24 @@ position = Vector2(1820, 980)
 unique_name_in_owner = true
 position = Vector2(1820, 150)
 
-[node name="RandomFun" type="Node2D" parent="." unique_id=770572122]
-script = ExtResource("2_ula52")
-
-[node name="Planes" type="Node2D" parent="RandomFun" unique_id=1598676824]
+[node name="Planes" type="Node2D" parent="." unique_id=1598676824]
 unique_name_in_owner = true
 
-[node name="Mouse" type="StaticBody2D" parent="RandomFun" unique_id=1357731899]
+[node name="Mouse" type="StaticBody2D" parent="." unique_id=1357731899]
 unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RandomFun/Mouse" unique_id=1984306752]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse" unique_id=1984306752]
 shape = SubResource("CircleShape2D_x2yg3")
 
-[node name="PlanePopTimer" type="Timer" parent="." unique_id=1551500021]
+[node name="System" type="Node2D" parent="." unique_id=1089304166]
+
+[node name="PlanePopTimer" type="Timer" parent="System" unique_id=1551500021]
 wait_time = 2.0
 one_shot = true
 
-[node name="GameOverTimer" type="Timer" parent="." unique_id=160320059]
+[node name="GameOverTimer" type="Timer" parent="System" unique_id=160320059]
 
-[connection signal="timeout" from="PlanePopTimer" to="RandomFun" method="_on_plane_pop_timer_timeout"]
-[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
+[connection signal="timeout" from="System/PlanePopTimer" to="." method="_on_plane_pop_timer_timeout"]
+[connection signal="timeout" from="System/GameOverTimer" to="System" method="_on_game_over_timer_timeout"]

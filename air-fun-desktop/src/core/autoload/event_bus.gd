@@ -12,6 +12,11 @@ extends Node
 
 # Planes
 @warning_ignore("unused_signal") signal sigNewPlanePop()
+@warning_ignore("unused_signal") signal sigPlaneCrashed(game :Node2D)
+@warning_ignore("unused_signal") signal sigPlaneArrived(id :int)
+@warning_ignore("unused_signal") signal sigPlaneSelect(selected :bool, id :int)
+@warning_ignore("unused_signal") signal sigPlaneWarningStart(id :int)
+@warning_ignore("unused_signal") signal sigPlaneWarningEnd(id :int)
 
 
 # Mouse
