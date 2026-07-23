@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://dbu033tn423er"]
+
+[ext_resource type="Texture2D" uid="uid://dvt6e1qiik5mk" path="res://assets/2D/airport/airport1.png" id="1_uf1sx"]
+
+[sub_resource type="Gradient" id="Gradient_l2ntc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.030136986, 0.11780822, 0.28219178, 0.684471, 0.727027, 0.759162, 1)
+colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.654902, 0.580392, 0.372549, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_svaw8"]
+seed = 10
+frequency = 0.0011
+offset = Vector3(-666.67, -634.15, 0)
+fractal_lacunarity = 2.2
+fractal_weighted_strength = 0.86
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ccjeu"]
+width = 1920
+height = 1080
+noise = SubResource("FastNoiseLite_svaw8")
+color_ramp = SubResource("Gradient_l2ntc")
+
+[sub_resource type="Curve2D" id="Curve2D_l2ntc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 135, 174, 0, 0, 0, 0, 134, 142, 0, 0.14864358, 0, -0.14864358, 129, 132, 0, 0, 0, 0, 116, 125, 0, 0, 0, 0, 53, 125, 0, 0, 0, 0, 38, 118, 0, 0, 0, 0, 33, 103, 0, 0, 0, 0, 33, 75)
+}
+point_count = 8
+
+[node name="AirportFun" type="Node2D" unique_id=929879896]
+
+[node name="Control" type="Control" parent="." unique_id=1511855443]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=1010438772]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_ccjeu")
+
+[node name="Runway" type="Node2D" parent="." unique_id=1061427671]
+position = Vector2(720, 651)
+
+[node name="Airport Top" type="TextureRect" parent="Runway" unique_id=432589024]
+offset_right = 670.0
+offset_bottom = 200.0
+texture = ExtResource("1_uf1sx")
+
+[node name="RWL" type="Node2D" parent="Runway" unique_id=626309665]
+position = Vector2(85, 25)
+rotation = 1.5707964
+
+[node name="Label" type="Label" parent="Runway/RWL" unique_id=1437831088]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_type_variation = &"LabelSmall"
+theme_override_font_sizes/font_size = 18
+text = "6"
+horizontal_alignment = 1
+
+[node name="RWR" type="Node2D" parent="Runway" unique_id=1540978961]
+position = Vector2(580, 25)
+rotation = -1.5707964
+
+[node name="Label" type="Label" parent="Runway/RWR" unique_id=51312282]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_type_variation = &"LabelSmall"
+theme_override_font_sizes/font_size = 18
+text = "24"
+horizontal_alignment = 1
+
+[node name="Traffic" type="Node2D" parent="Runway" unique_id=730331103]
+
+[node name="ParkingSlots" type="Node2D" parent="Runway/Traffic" unique_id=1444252978]
+
+[node name="Slot1" type="Marker2D" parent="Runway/Traffic/ParkingSlots" unique_id=1006381238]
+position = Vector2(135, 175)
+
+[node name="Slot2" type="Marker2D" parent="Runway/Traffic/ParkingSlots" unique_id=1150459067]
+position = Vector2(235, 175)
+
+[node name="Slot3" type="Marker2D" parent="Runway/Traffic/ParkingSlots" unique_id=392715563]
+position = Vector2(335, 175)
+
+[node name="Slot4" type="Marker2D" parent="Runway/Traffic/ParkingSlots" unique_id=798926917]
+position = Vector2(435, 175)
+
+[node name="Slot5" type="Marker2D" parent="Runway/Traffic/ParkingSlots" unique_id=233354064]
+position = Vector2(535, 175)
+
+[node name="Runway Start L" type="Marker2D" parent="Runway/Traffic" unique_id=1914354604]
+position = Vector2(58, 25)
+
+[node name="Taxi Stop" type="Marker2D" parent="Runway/Traffic" unique_id=1041426986]
+position = Vector2(33, 75)
+
+[node name="Airborne L" type="Marker2D" parent="Runway/Traffic" unique_id=1195822894]
+position = Vector2(577, 25)
+
+[node name="Taxi1L" type="Node2D" parent="Runway/Traffic" unique_id=540067197]
+
+[node name="Path2D" type="Path2D" parent="Runway/Traffic/Taxi1L" unique_id=326804636]
+curve = SubResource("Curve2D_l2ntc")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Runway/Traffic/Taxi1L/Path2D" unique_id=1640297061]
+position = Vector2(135, 174)
+rotation = -1.6020361
+
+[node name="Departure L" type="Node2D" parent="Runway/Traffic" unique_id=1991299429]

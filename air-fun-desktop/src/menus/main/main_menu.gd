@@ -14,3 +14,9 @@ func _on_random_fun_pressed() -> void:
 	Global.game_mode = "random_fun"
 	# res://src/core/main_game/main_game.tscn
 	EventBus.sigChangeScene.emit("uid://dpx5o0r55oxb7")
+
+
+func _on_airport_fun_pressed() -> void:
+	Global.game_mode = "airport_fun"
+	# res://src/core/main_game/main_game.tscn
+	EventBus.sigChangeScene.emit("uid://dbu033tn423er")
