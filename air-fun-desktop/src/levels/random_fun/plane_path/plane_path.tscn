@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://drmf6emnmt2pd"]
 
-[ext_resource type="Script" uid="uid://cuk2o03dgq8kg" path="res://src/entities/plane_path/plane_path.gd" id="1_v7ur2"]
-[ext_resource type="Script" uid="uid://fp1dbrkd7pxo" path="res://src/entities/plane_path/target.gd" id="2_mesrh"]
+[ext_resource type="Script" uid="uid://cuk2o03dgq8kg" path="res://src/levels/random_fun/plane_path/plane_path.gd" id="1_v7ur2"]
+[ext_resource type="Script" uid="uid://fp1dbrkd7pxo" path="res://src/levels/random_fun/plane_path/target.gd" id="2_mesrh"]
 [ext_resource type="Texture2D" uid="uid://f4nslmp2rwdn" path="res://assets/2D/crosshair062.png" id="2_nia3m"]
 [ext_resource type="Texture2D" uid="uid://bxopoqnvjjhc5" path="res://assets/2D/trajectory.png" id="2_reg5m"]
-[ext_resource type="Script" uid="uid://r2umcv0vlwqn" path="res://src/entities/plane_path/select_target.gd" id="5_3ejtm"]
+[ext_resource type="Script" uid="uid://r2umcv0vlwqn" path="res://src/levels/random_fun/plane_path/select_target.gd" id="5_3ejtm"]
 [ext_resource type="PackedScene" uid="uid://c4qclj41y431i" path="res://src/entities/planes/plane/plane.tscn" id="7_k7gyv"]
 [ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="10_8j881"]
 

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b2r563y0n07br"]
+
+[ext_resource type="Script" uid="uid://boxcf4rpdby0x" path="res://src/levels/airport_fun/plane_take_off/plane_take_off.gd" id="1_8tfo6"]
+[ext_resource type="Script" uid="uid://bv71m3sgutdao" path="res://src/core/common/fsm/state_machine.gd" id="2_bbg5g"]
+[ext_resource type="Script" uid="uid://qlvy26uewffy" path="res://src/levels/airport_fun/plane_take_off/states/parked.gd" id="3_4qt1b"]
+[ext_resource type="Script" uid="uid://dj8uoiator758" path="res://src/levels/airport_fun/plane_take_off/states/ready_to_fly.gd" id="4_ei6ur"]
+[ext_resource type="Script" uid="uid://biv2p1vx54fqb" path="res://src/levels/airport_fun/plane_take_off/states/taxi.gd" id="5_b16j2"]
+
+[node name="PlaneTakeOff" type="Node2D" unique_id=977051196]
+script = ExtResource("1_8tfo6")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1288143687]
+unique_name_in_owner = true
+script = ExtResource("2_bbg5g")
+
+[node name="Parked" type="Node" parent="StateMachine" unique_id=1666793388]
+script = ExtResource("3_4qt1b")
+
+[node name="ReadyToFly" type="Node" parent="StateMachine" unique_id=338753505]
+script = ExtResource("4_ei6ur")
+
+[node name="Taxi" type="Node" parent="StateMachine" unique_id=665003015]
+script = ExtResource("5_b16j2")

@@ -4,7 +4,6 @@ var plane_path_scene: PackedScene = preload("uid://drmf6emnmt2pd")
 @export var margin :int = 200
 @export var min_travel :int = 300
 
-
 @onready var terrain: TextureRect = %Background
 @onready var waiting_marks: Node2D = %WaitingMarks
 

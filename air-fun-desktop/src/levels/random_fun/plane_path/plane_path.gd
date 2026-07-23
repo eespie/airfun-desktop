@@ -9,19 +9,6 @@ extends Node2D
 
 @onready var plane_waiting_timer = %PlaneWaitingTimer
 
-const PLANE_COLORS = [
-	Color.CRIMSON,
-	Color.BLUE,
-	Color.GREEN,
-	Color.DARK_SALMON,
-	Color.BLUE_VIOLET,
-	Color.WHITE_SMOKE,
-	Color.VIOLET,
-	Color.ORANGE,
-	Color.YELLOW,
-	Color.DEEP_PINK
-]
-
 var waiting_path : Array[Vector2]
 
 var segment_length : float = 30
@@ -105,7 +92,7 @@ func _process(delta):
 			trajectory_progress = curve.get_closest_offset(points[curve_index])
 	
 func init(id : int, type : int, plane_pos : Vector2, target_pos : Vector2, waiting : Array[Vector2]):
-	var curr_color = PLANE_COLORS[id % PLANE_COLORS.size()]
+	var curr_color = Global.get_plane_color(id)
 	trajectory.modulate = curr_color
 
 	plane.set_model(type)

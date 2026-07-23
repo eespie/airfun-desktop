@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dbu033tn423er"]
 
+[ext_resource type="Script" uid="uid://blu53mk1iibvb" path="res://src/levels/airport_fun/airport_fun.gd" id="1_l2ntc"]
 [ext_resource type="Texture2D" uid="uid://dvt6e1qiik5mk" path="res://assets/2D/airport/airport1.png" id="1_uf1sx"]
+[ext_resource type="PackedScene" uid="uid://tpcm05wk1rxs" path="res://src/entities/planes/a321/a321.tscn" id="4_tmw7w"]
 
 [sub_resource type="Gradient" id="Gradient_l2ntc"]
 interpolation_mode = 1
@@ -23,11 +25,27 @@ color_ramp = SubResource("Gradient_l2ntc")
 
 [sub_resource type="Curve2D" id="Curve2D_l2ntc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 135, 174, 0, 0, 0, 0, 134, 142, 0, 0.14864358, 0, -0.14864358, 129, 132, 0, 0, 0, 0, 116, 125, 0, 0, 0, 0, 53, 125, 0, 0, 0, 0, 38, 118, 0, 0, 0, 0, 33, 103, 0, 0, 0, 0, 33, 75)
+"points": PackedVector2Array(0, 0, 0, 0, 135, 175, 0, 0, 0, 0, 134, 142, 0, 0.14864358, 0, -0.14864358, 129, 132, 0, 0, 0, 0, 116, 125, 0, 0, 0, 0, 53, 125, 0, 0, 0, 0, 38, 118, 0, 0, 0, 0, 33, 103, 0, 1, 0, -5.8522573, 33, 100)
 }
 point_count = 8
 
+[sub_resource type="Curve2D" id="Curve2D_svaw8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 33, 77, 0, 0, 0, 0, 33, 20, -5.034324, 5.034324, 5.034324, -5.034324, 38, 7, 0, 0, 0, 0, 50, 2, 0, 0, 0, 0, 58, 2)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_wjucs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 58, 25, 0, 0, 0, 0, 577, 25)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tmw7w"]
+radius = 5.0
+
 [node name="AirportFun" type="Node2D" unique_id=929879896]
+script = ExtResource("1_l2ntc")
 
 [node name="Control" type="Control" parent="." unique_id=1511855443]
 layout_mode = 3
@@ -117,18 +135,59 @@ position = Vector2(535, 175)
 position = Vector2(58, 25)
 
 [node name="Taxi Stop" type="Marker2D" parent="Runway/Traffic" unique_id=1041426986]
-position = Vector2(33, 75)
+position = Vector2(33, 100)
 
 [node name="Airborne L" type="Marker2D" parent="Runway/Traffic" unique_id=1195822894]
 position = Vector2(577, 25)
 
-[node name="Taxi1L" type="Node2D" parent="Runway/Traffic" unique_id=540067197]
+[node name="Taxi 1L" type="Node2D" parent="Runway/Traffic" unique_id=540067197]
 
-[node name="Path2D" type="Path2D" parent="Runway/Traffic/Taxi1L" unique_id=326804636]
+[node name="Path2D" type="Path2D" parent="Runway/Traffic/Taxi 1L" unique_id=326804636]
 curve = SubResource("Curve2D_l2ntc")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Runway/Traffic/Taxi1L/Path2D" unique_id=1640297061]
-position = Vector2(135, 174)
-rotation = -1.6020361
+[node name="Follow Taxi 1L" type="PathFollow2D" parent="Runway/Traffic/Taxi 1L/Path2D" unique_id=1640297061]
+position = Vector2(135, 175)
+rotation = -1.6010901
+
+[node name="PreStart 1L" type="Node2D" parent="Runway/Traffic" unique_id=1300738538]
+
+[node name="Path2D" type="Path2D" parent="Runway/Traffic/PreStart 1L" unique_id=842805872]
+position = Vector2(0, 23)
+curve = SubResource("Curve2D_svaw8")
+
+[node name="Follow Prestart 1L" type="PathFollow2D" parent="Runway/Traffic/PreStart 1L/Path2D" unique_id=74975011]
+position = Vector2(33, 77)
+rotation = -1.5707964
 
 [node name="Departure L" type="Node2D" parent="Runway/Traffic" unique_id=1991299429]
+
+[node name="Path2D" type="Path2D" parent="Runway/Traffic/Departure L" unique_id=1247247779]
+curve = SubResource("Curve2D_wjucs")
+
+[node name="Follow Departure L" type="PathFollow2D" parent="Runway/Traffic/Departure L/Path2D" unique_id=1397697765]
+position = Vector2(58, 25)
+
+[node name="Planes" type="Node2D" parent="." unique_id=1290943230]
+unique_name_in_owner = true
+
+[node name="Mouse" type="StaticBody2D" parent="." unique_id=114463911]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mouse" unique_id=602798686]
+shape = SubResource("CircleShape2D_tmw7w")
+
+[node name="System" type="Node2D" parent="." unique_id=1641083164]
+
+[node name="PlanePopTimer" type="Timer" parent="System" unique_id=1013945269]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="GameOverTimer" type="Timer" parent="System" unique_id=2104322530]
+unique_name_in_owner = true
+
+[node name="A321" parent="." unique_id=2078365661 instance=ExtResource("4_tmw7w")]
+position = Vector2(753, 750)
+rotation = -1.5707964
