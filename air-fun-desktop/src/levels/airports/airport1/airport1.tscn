@@ -3,7 +3,16 @@
 [ext_resource type="Script" uid="uid://bsceu7oq8274b" path="res://src/levels/airports/airport1/airport1.gd" id="1_85j0x"]
 [ext_resource type="Texture2D" uid="uid://dvt6e1qiik5mk" path="res://assets/2D/airport/airport1.png" id="1_c7kmv"]
 [ext_resource type="Texture2D" uid="uid://bww42xyls0w25" path="res://assets/2D/airport/arrows1.png" id="3_hqtqp"]
+[ext_resource type="Script" uid="uid://whdhwyeh2x3o" path="res://src/core/common/system/highlight.gd" id="4_6f51w"]
 [ext_resource type="Texture2D" uid="uid://dfc3tmw4jsgei" path="res://assets/2D/airport/parking.png" id="4_j545i"]
+[ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="5_ksqfn"]
+[ext_resource type="Curve2D" uid="uid://cbgblmdox3tn6" path="res://resources/curves/airport1/path_taxi_1___1.tres" id="5_qoy1x"]
+[ext_resource type="PackedScene" uid="uid://d3i24frqtvmu5" path="res://src/core/common/system/curves.tscn" id="6_qoy1x"]
+[ext_resource type="Curve2D" uid="uid://cbw3d640titpv" path="res://resources/curves/airport1/path_taxi_2___1.tres" id="6_rytj0"]
+[ext_resource type="Curve2D" uid="uid://dirkjempcqkuj" path="res://resources/curves/airport1/path_align_1.tres" id="7_rytj0"]
+[ext_resource type="Curve2D" uid="uid://bmay1b34ywo0a" path="res://resources/curves/airport1/path_takeoff_1.tres" id="8_2q050"]
+[ext_resource type="Curve2D" uid="uid://cd3y7djw10kho" path="res://resources/curves/airport1/path_align_2.tres" id="9_50nip"]
+[ext_resource type="Curve2D" uid="uid://b0amrudbyw5r" path="res://resources/curves/airport1/path_takeoff_2.tres" id="11_ksqfn"]
 
 [sub_resource type="Gradient" id="Gradient_l2ntc"]
 interpolation_mode = 1
@@ -23,42 +32,6 @@ width = 1920
 height = 1080
 noise = SubResource("FastNoiseLite_svaw8")
 color_ramp = SubResource("Gradient_l2ntc")
-
-[sub_resource type="Curve2D" id="Curve2D_l2ntc"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 135, 175, 0, 0, 0, 0, 134, 142, 0, 0.14864358, 0, -0.14864358, 129, 132, 0, 0, 0, 0, 116, 125, 0, 0, 0, 0, 53, 125, 0, 0, 0, 0, 38, 118, 0, 0, 0, 0, 33, 103, 0, 1, 0, -5.8522573, 33, 100)
-}
-point_count = 8
-
-[sub_resource type="Curve2D" id="Curve2D_6f51w"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 33, 100, 0, 0, 0, 0, 33, 37, -3.813882, 3.8901598, 3.813882, -3.8901598, 37, 29, 0, 0, 0, 0, 47, 25, 0, 0, 0, 0, 58, 25)
-}
-point_count = 5
-
-[sub_resource type="Curve2D" id="Curve2D_qoy1x"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 58, 25, 0, 0, 0, 0, 561, 25)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_rytj0"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 135, 174, 0, 0, 0, 0, 135, 142, -5.0225177, 5.637008, 5.0225177, -5.637008, 140, 132, 0, 0, 0, 0, 159, 125, 0, 0, 0, 0, 613, 125, -8.9227915, 8.052276, 8.9227915, -8.052276, 629, 120, 0, 0, 0, 0, 637, 105, 0, 0, 0, 0, 637, 99)
-}
-point_count = 8
-
-[sub_resource type="Curve2D" id="Curve2D_svaw8"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 637, 76, 0, 0, 0, 0, 637, 19, 3.9310694, 4.6681447, -3.9310694, -4.6681447, 634, 7, 0, 0, 0, 0, 621, 2, 0, 0, 0, 0, 612, 2)
-}
-point_count = 5
-
-[sub_resource type="Curve2D" id="Curve2D_wjucs"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 612, 25, 0, 0, 0, 0, 100, 25)
-}
-point_count = 2
 
 [node name="Airport1" type="Node2D" unique_id=125140555]
 script = ExtResource("1_85j0x")
@@ -123,6 +96,7 @@ visible = false
 position = Vector2(98, 25)
 rotation = 1.5707964
 texture = ExtResource("3_hqtqp")
+script = ExtResource("4_6f51w")
 
 [node name="Airborne1" type="Sprite2D" parent="Root/Runway/Side1" unique_id=218254992]
 unique_name_in_owner = true
@@ -131,17 +105,9 @@ position = Vector2(561, 25)
 rotation = 1.5707964
 texture = ExtResource("3_hqtqp")
 
-[node name="Path Taxi 1 - 1" type="Path2D" parent="Root/Runway/Side1" unique_id=286759538]
-unique_name_in_owner = true
-curve = SubResource("Curve2D_l2ntc")
-
-[node name="Path Align 1" type="Path2D" parent="Root/Runway/Side1" unique_id=575898512]
-unique_name_in_owner = true
-curve = SubResource("Curve2D_6f51w")
-
-[node name="Path Takeoff 1" type="Path2D" parent="Root/Runway/Side1" unique_id=1714598267]
-unique_name_in_owner = true
-curve = SubResource("Curve2D_qoy1x")
+[node name="Select" type="Sprite2D" parent="Root/Runway/Side1/Airborne1" unique_id=78108991]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_ksqfn")
 
 [node name="Side2" type="Node2D" parent="Root/Runway" unique_id=1986483509]
 
@@ -168,6 +134,7 @@ visible = false
 position = Vector2(550, 25)
 rotation = -1.5707964
 texture = ExtResource("3_hqtqp")
+script = ExtResource("4_6f51w")
 
 [node name="Airborne2" type="Sprite2D" parent="Root/Runway/Side2" unique_id=1325974892]
 unique_name_in_owner = true
@@ -176,18 +143,9 @@ position = Vector2(100, 25)
 rotation = -1.5707964
 texture = ExtResource("3_hqtqp")
 
-[node name="Path Taxi 2 - 1" type="Path2D" parent="Root/Runway/Side2" unique_id=2106630834]
-unique_name_in_owner = true
-curve = SubResource("Curve2D_rytj0")
-
-[node name="Path Align 2" type="Path2D" parent="Root/Runway/Side2" unique_id=751747158]
-unique_name_in_owner = true
-position = Vector2(0, 23)
-curve = SubResource("Curve2D_svaw8")
-
-[node name="Path Takeoff 2" type="Path2D" parent="Root/Runway/Side2" unique_id=858209880]
-unique_name_in_owner = true
-curve = SubResource("Curve2D_wjucs")
+[node name="Select" type="Sprite2D" parent="Root/Runway/Side2/Airborne2" unique_id=1529475037]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_ksqfn")
 
 [node name="ParkingSlots" type="Node2D" parent="Root/Runway" unique_id=1292623138]
 position = Vector2(-1, 1)
@@ -226,3 +184,34 @@ visible = false
 position = Vector2(535, 175)
 rotation = 3.1415927
 texture = ExtResource("4_j545i")
+
+[node name="Path" type="Node2D" parent="." unique_id=1047137503]
+
+[node name="Path Taxi 1 - 1" type="Path2D" parent="Path" unique_id=286759538]
+unique_name_in_owner = true
+curve = ExtResource("5_qoy1x")
+
+[node name="Path Align 1" type="Path2D" parent="Path" unique_id=575898512]
+unique_name_in_owner = true
+curve = ExtResource("7_rytj0")
+
+[node name="Path Takeoff 1" type="Path2D" parent="Path" unique_id=1714598267]
+unique_name_in_owner = true
+curve = ExtResource("8_2q050")
+
+[node name="Path Taxi 2 - 1" type="Path2D" parent="Path" unique_id=2106630834]
+unique_name_in_owner = true
+curve = ExtResource("6_rytj0")
+
+[node name="Path Align 2" type="Path2D" parent="Path" unique_id=751747158]
+unique_name_in_owner = true
+curve = ExtResource("9_50nip")
+
+[node name="Path Takeoff 2" type="Path2D" parent="Path" unique_id=858209880]
+unique_name_in_owner = true
+curve = ExtResource("11_ksqfn")
+
+[node name="System" type="Node" parent="." unique_id=1445931148]
+
+[node name="Curves" parent="System" unique_id=1083773608 instance=ExtResource("6_qoy1x")]
+unique_name_in_owner = true

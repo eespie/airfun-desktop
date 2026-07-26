@@ -30,6 +30,8 @@ func _bind_events() -> void:
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigNewPlaneTimer.connect(_on_new_plane_timer)
+	EventBus.sigPlaneUnselectAll.connect(_on_unselect_all_planes)
+	EventBus.sigPlaneCrashed.connect(_on_plane_crashed)
 
 func _on_mouse_drag(mouse_pos: Vector2i):
 	self.mouse.position = mouse_pos
@@ -49,11 +51,6 @@ func _on_new_plane_timer(wait: float):
 		plane_pop_timer.stop()
 	plane_pop_timer.start(wait)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_plane_pop_timer_timeout() -> void:
 	var slot = airport.get_available_parking_slot()
 	if slot == "":
@@ -65,6 +62,32 @@ func _on_plane_pop_timer_timeout() -> void:
 	plane_count += 1
 	var plane = PLANE_TAKE_OFF.instantiate()
 	planes_root.add_child(plane)
-	plane.init(plane_id, airport, slot, 0)
+	var target_pos = _get_target_pos()
+	plane.init(plane_id, airport, slot, 0, target_pos)
 	
 	EventBus.sigNewPlaneTimer.emit(1.0)
+
+func _on_unselect_all_planes():
+	for id in range(1, plane_id + 1):
+		EventBus.sigPlaneSelect.emit(false, id)
+
+func _on_plane_crashed(_id: int):
+	if game_over_timer.is_stopped():
+		game_over_timer.start(0.5)
+	
+func _on_game_over_timer_timeout() -> void:
+	EventBus.sigGameOver.emit()
+
+func _get_target_pos() -> Vector2:
+	var side = randf()
+	if side > 0.75:
+		# top
+		return Vector2(randi_range(100, 1820), 150)
+	if side > 0.5:
+		# left
+		return Vector2(1820, randi_range(150, 980))
+	if side > 0.25:
+		# bottom
+		return Vector2(randi_range(100, 1820), 980)
+	# right
+	return Vector2(100, randi_range(150, 980))

@@ -14,8 +14,8 @@ func _bind_events():
 	EventBus.sigPlaneWarningEnd.connect(_on_plane_warning_end)
 
 func _process(_delta):
-	var transparency = curves.get_pulse()
-	self_modulate = Color(1.0, 0, 0, transparency) 
+	if visible:
+		self_modulate = Color(1.0, 0, 0, curves.get_pulse()) 
 
 func set_plane_id(id: int):
 	plane_id = id

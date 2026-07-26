@@ -18,6 +18,7 @@ extends Node2D
 @onready var path_align_2: Path2D = %"Path Align 2"
 @onready var path_takeoff_2: Path2D = %"Path Takeoff 2"
 
+
 @onready var SELECT_PARKING = {
 	"slot1" : parking_slot_1,
 	"slot2" : parking_slot_2,
@@ -31,10 +32,15 @@ extends Node2D
 	"rw1b" : start_2,
 }
 
-@onready var TAXI_BY_SLOT_AND_RW = {
+@onready var DEPARTURE_BY_RW = {
+	"rw1a" : airborne_1,
+	"rw1b" : airborne_2,
+}
+
+var TAXI_BY_SLOT_AND_RW = {
 	"slot1" : {
-		"rw1a" : [path_taxi_1___1],
-		"rw1b" : [path_taxi_2___1],
+		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___1.tres"],
+		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___1.tres"],
 	},
 	"slot2" : {},
 	"slot3" : {},
@@ -42,14 +48,14 @@ extends Node2D
 	"slot5" : {},
 }
 
-@onready var ALIGN_BY_RW = {
-	"rw1a" : path_align_1,
-	"rw1b" : path_align_2,
+var ALIGN_BY_RW = {
+	"rw1a" : "res://resources/curves/airport1/path_align_1.tres",
+	"rw1b" : "res://resources/curves/airport1/path_align_2.tres",
 }
 
-@onready var TAKEOFF_BY_RW = {
-	"rw1a" : path_takeoff_1,
-	"rw1b" : path_takeoff_2,
+var TAKEOFF_BY_RW = {
+	"rw1a" : "res://resources/curves/airport1/path_takeoff_1.tres",
+	"rw1b" : "res://resources/curves/airport1/path_takeoff_2.tres",
 }
 
 enum ParkingStatus {AVAILABLE, USED, UNAVAILABLE}
@@ -65,7 +71,6 @@ var parking_slots_status = {
 func list_runway_to_select():
 	return SELECT_RUNWAY
 
-
 func get_available_parking_slot() -> String:
 	for slot in parking_slots_status:
 		if parking_slots_status[slot] == ParkingStatus.AVAILABLE:
@@ -73,5 +78,12 @@ func get_available_parking_slot() -> String:
 			return slot
 	return ""
 
+func set_parking_slot_available(slot: String) -> void:
+	parking_slots_status[slot] = ParkingStatus.AVAILABLE
+
 func get_slot_pos(slot: String) -> Vector2:
 	return SELECT_PARKING[slot].global_position
+
+func change_visibility_of_all_runway_selectors(is_visible: bool) -> void:
+	for rw in SELECT_RUNWAY:
+		SELECT_RUNWAY[rw].visible = is_visible

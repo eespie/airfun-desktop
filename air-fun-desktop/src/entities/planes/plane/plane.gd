@@ -10,6 +10,7 @@ const PLANE_MODELS = [A_321, A_380, CONCORDE, Q_400]
 @onready var model: Node2D = %Model
 @onready var select_plane: Sprite2D = %SelectPlane
 @onready var highlight_plane: Sprite2D = %HighlightPlane
+@onready var select_plane_long: Node2D = %SelectPlaneLong
 
 var plane_id :int = 0
 var plane_model
@@ -33,6 +34,7 @@ func set_model(type : int):
 	model.add_child(plane_model)
 	select_plane.scale = Vector2(plane_model.plane_select_scale, plane_model.plane_select_scale)
 	highlight_plane.scale = Vector2(plane_model.plane_select_scale, plane_model.plane_select_scale)
+	select_plane_long.resize(plane_model.plane_select_scale)
 	plane_speed = floorf(plane_model.plane_speed)
 
 func allow_collisions(flag : bool):
