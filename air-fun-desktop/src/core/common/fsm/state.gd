@@ -2,6 +2,11 @@
 class_name State
 extends Node
 
+var context : Node
+
+func set_context(ctx : Node) -> void:
+	context = ctx
+
 func enter() -> void:
 	pass
 	

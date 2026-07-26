@@ -9,8 +9,12 @@ const GAME_OVER = preload("uid://dqvnn2w00ddl1")
 const HUD = preload("uid://blw2kf0lenpx8")
 const PAUSED = preload("uid://cko02oljhiby")
 const RANDOM_FUN = preload("uid://tos5wickywea")
+const AIRPORT_FUN = preload("uid://dbu033tn423er")
 
-const GAME_MODES = {'random_fun':RANDOM_FUN}
+const GAME_MODES = {
+	'random_fun': RANDOM_FUN,
+	'airport_fun': AIRPORT_FUN,
+}
 
 var is_paused : bool = false
 

@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://c7e61voml44to"]
+
+[ext_resource type="Script" uid="uid://bsceu7oq8274b" path="res://src/levels/airports/airport1/airport1.gd" id="1_85j0x"]
+[ext_resource type="Texture2D" uid="uid://dvt6e1qiik5mk" path="res://assets/2D/airport/airport1.png" id="1_c7kmv"]
+[ext_resource type="Texture2D" uid="uid://bww42xyls0w25" path="res://assets/2D/airport/arrows1.png" id="3_hqtqp"]
+[ext_resource type="Texture2D" uid="uid://dfc3tmw4jsgei" path="res://assets/2D/airport/parking.png" id="4_j545i"]
+
+[sub_resource type="Gradient" id="Gradient_l2ntc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.030136986, 0.11780822, 0.28219178, 0.684471, 0.727027, 0.759162, 1)
+colors = PackedColorArray(0.703808, 0.703808, 0.703808, 1, 0.552956, 0.552956, 0.552955, 1, 0.2538, 0.54, 0.42552, 1, 0.301783, 0.647498, 0.507429, 1, 0.654902, 0.580392, 0.372549, 1, 0.754498, 0.704219, 0.254275, 1, 0.4186, 0.62335, 0.91, 1, 0.546737, 0.695827, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_svaw8"]
+seed = 10
+frequency = 0.0011
+offset = Vector3(-455.29, -585.37, 0)
+fractal_lacunarity = 2.2
+fractal_weighted_strength = 0.86
+domain_warp_type = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_85j0x"]
+width = 1920
+height = 1080
+noise = SubResource("FastNoiseLite_svaw8")
+color_ramp = SubResource("Gradient_l2ntc")
+
+[sub_resource type="Curve2D" id="Curve2D_l2ntc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 135, 175, 0, 0, 0, 0, 134, 142, 0, 0.14864358, 0, -0.14864358, 129, 132, 0, 0, 0, 0, 116, 125, 0, 0, 0, 0, 53, 125, 0, 0, 0, 0, 38, 118, 0, 0, 0, 0, 33, 103, 0, 1, 0, -5.8522573, 33, 100)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_6f51w"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 33, 100, 0, 0, 0, 0, 33, 37, -3.813882, 3.8901598, 3.813882, -3.8901598, 37, 29, 0, 0, 0, 0, 47, 25, 0, 0, 0, 0, 58, 25)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_qoy1x"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 58, 25, 0, 0, 0, 0, 561, 25)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_rytj0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 135, 174, 0, 0, 0, 0, 135, 142, -5.0225177, 5.637008, 5.0225177, -5.637008, 140, 132, 0, 0, 0, 0, 159, 125, 0, 0, 0, 0, 613, 125, -8.9227915, 8.052276, 8.9227915, -8.052276, 629, 120, 0, 0, 0, 0, 637, 105, 0, 0, 0, 0, 637, 99)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_svaw8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 637, 76, 0, 0, 0, 0, 637, 19, 3.9310694, 4.6681447, -3.9310694, -4.6681447, 634, 7, 0, 0, 0, 0, 621, 2, 0, 0, 0, 0, 612, 2)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_wjucs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 612, 25, 0, 0, 0, 0, 100, 25)
+}
+point_count = 2
+
+[node name="Airport1" type="Node2D" unique_id=125140555]
+script = ExtResource("1_85j0x")
+
+[node name="Control" type="Control" parent="." unique_id=543261113]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=198959404]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_85j0x")
+
+[node name="Root" type="Node2D" parent="." unique_id=475865107]
+position = Vector2(625, 515)
+metadata/_edit_group_ = true
+
+[node name="Airport Top" type="TextureRect" parent="Root" unique_id=179037700]
+offset_right = 670.0
+offset_bottom = 200.0
+texture = ExtResource("1_c7kmv")
+
+[node name="Runway" type="Node2D" parent="Root" unique_id=1070520219]
+
+[node name="Side1" type="Node2D" parent="Root/Runway" unique_id=498236323]
+
+[node name="Heading" type="Node2D" parent="Root/Runway/Side1" unique_id=2047537913]
+position = Vector2(85, 25)
+rotation = 1.5707964
+
+[node name="Label" type="Label" parent="Root/Runway/Side1/Heading" unique_id=856957028]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_type_variation = &"LabelSmall"
+theme_override_font_sizes/font_size = 18
+text = "6"
+horizontal_alignment = 1
+
+[node name="Start1" type="Sprite2D" parent="Root/Runway/Side1" unique_id=1939510506]
+unique_name_in_owner = true
+visible = false
+position = Vector2(98, 25)
+rotation = 1.5707964
+texture = ExtResource("3_hqtqp")
+
+[node name="Airborne1" type="Sprite2D" parent="Root/Runway/Side1" unique_id=218254992]
+unique_name_in_owner = true
+visible = false
+position = Vector2(561, 25)
+rotation = 1.5707964
+texture = ExtResource("3_hqtqp")
+
+[node name="Path Taxi 1 - 1" type="Path2D" parent="Root/Runway/Side1" unique_id=286759538]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_l2ntc")
+
+[node name="Path Align 1" type="Path2D" parent="Root/Runway/Side1" unique_id=575898512]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_6f51w")
+
+[node name="Path Takeoff 1" type="Path2D" parent="Root/Runway/Side1" unique_id=1714598267]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_qoy1x")
+
+[node name="Side2" type="Node2D" parent="Root/Runway" unique_id=1986483509]
+
+[node name="Heading" type="Node2D" parent="Root/Runway/Side2" unique_id=1263092374]
+position = Vector2(580, 25)
+rotation = -1.5707964
+
+[node name="Label" type="Label" parent="Root/Runway/Side2/Heading" unique_id=642007004]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.0
+offset_right = 9.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_type_variation = &"LabelSmall"
+theme_override_font_sizes/font_size = 18
+text = "24"
+horizontal_alignment = 1
+
+[node name="Start2" type="Sprite2D" parent="Root/Runway/Side2" unique_id=1128548530]
+unique_name_in_owner = true
+visible = false
+position = Vector2(550, 25)
+rotation = -1.5707964
+texture = ExtResource("3_hqtqp")
+
+[node name="Airborne2" type="Sprite2D" parent="Root/Runway/Side2" unique_id=1325974892]
+unique_name_in_owner = true
+visible = false
+position = Vector2(100, 25)
+rotation = -1.5707964
+texture = ExtResource("3_hqtqp")
+
+[node name="Path Taxi 2 - 1" type="Path2D" parent="Root/Runway/Side2" unique_id=2106630834]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_rytj0")
+
+[node name="Path Align 2" type="Path2D" parent="Root/Runway/Side2" unique_id=751747158]
+unique_name_in_owner = true
+position = Vector2(0, 23)
+curve = SubResource("Curve2D_svaw8")
+
+[node name="Path Takeoff 2" type="Path2D" parent="Root/Runway/Side2" unique_id=858209880]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_wjucs")
+
+[node name="ParkingSlots" type="Node2D" parent="Root/Runway" unique_id=1292623138]
+position = Vector2(-1, 1)
+
+[node name="ParkingSlot1" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=952327902]
+unique_name_in_owner = true
+visible = false
+position = Vector2(135, 175)
+rotation = 3.1415927
+texture = ExtResource("4_j545i")
+
+[node name="ParkingSlot2" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1893567667]
+unique_name_in_owner = true
+visible = false
+position = Vector2(235, 175)
+rotation = 3.1415927
+texture = ExtResource("4_j545i")
+
+[node name="ParkingSlot3" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1446511925]
+unique_name_in_owner = true
+visible = false
+position = Vector2(335, 175)
+rotation = 3.1415927
+texture = ExtResource("4_j545i")
+
+[node name="ParkingSlot4" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1621039173]
+unique_name_in_owner = true
+visible = false
+position = Vector2(435, 175)
+rotation = 3.1415927
+texture = ExtResource("4_j545i")
+
+[node name="ParkingSlot5" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1565205200]
+unique_name_in_owner = true
+visible = false
+position = Vector2(535, 175)
+rotation = 3.1415927
+texture = ExtResource("4_j545i")

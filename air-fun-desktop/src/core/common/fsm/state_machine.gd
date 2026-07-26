@@ -1,14 +1,20 @@
+class_name StateMachine
 extends Node
 
 @export var initial_state: State
 
 var current_state: State
+var context : Node
 
 # Initialize the state machine by giving each child state a reference to the
 # parent object it belongs to and enter the default starting_state.
-func init() -> void:
+func init(ctx : Node) -> void:
+	propagate_call("set_context", [ctx])
 	# Initialize to the default state
 	change_state(initial_state)
+
+func set_context(ctx : Node) -> void:
+	context = ctx
 	
 # Change to the new state by first calling any exit logic on the current state.
 func change_state(new_state: State) -> void:

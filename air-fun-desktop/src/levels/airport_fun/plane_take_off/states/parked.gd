@@ -4,8 +4,10 @@ extends State
 # select runway for taxi
 # select destination after takeoff
 
+@onready var plane: Node2D = %Plane
+
 func enter() -> void:
-	pass
+	plane.global_position = context.get_slot_pos()
 	
 func exit() -> void:
 	pass

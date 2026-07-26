@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://co2miokqi8wwp" path="res://src/entities/planes/plane/select_plane.gd" id="4_yh0ff"]
 [ext_resource type="Script" uid="uid://bbkl118dq71ao" path="res://src/entities/planes/plane/highlight_plane.gd" id="4_yra7y"]
 [ext_resource type="PackedScene" uid="uid://dwe3jwnmr3wru" path="res://src/core/common/explosion/Explosion.tscn" id="5_akgv8"]
+[ext_resource type="PackedScene" uid="uid://d3i24frqtvmu5" path="res://src/core/common/system/curves.tscn" id="6_co2eg"]
 
 [node name="Plane" type="Node2D" unique_id=1659998964]
 script = ExtResource("1_yra7y")
@@ -29,3 +30,8 @@ texture = ExtResource("3_h6mec")
 script = ExtResource("4_yra7y")
 
 [node name="Explosion" parent="Selection" unique_id=456194140 instance=ExtResource("5_akgv8")]
+
+[node name="System" type="Node" parent="." unique_id=105971459]
+
+[node name="Curves" parent="System" unique_id=1083773608 instance=ExtResource("6_co2eg")]
+unique_name_in_owner = true

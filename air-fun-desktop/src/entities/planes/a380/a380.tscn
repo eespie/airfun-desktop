@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="4_tnvfq"]
 [ext_resource type="Script" uid="uid://wtjnuv2e1rke" path="res://src/entities/planes/plane/warning.gd" id="5_wfgjq"]
 [ext_resource type="AudioStream" uid="uid://2ixbje2s61am" path="res://assets/sounds/radar2.ogg" id="6_1qgfg"]
+[ext_resource type="PackedScene" uid="uid://d3i24frqtvmu5" path="res://src/core/common/system/curves.tscn" id="7_tnvfq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tc6ud"]
 radius = 50.01
@@ -44,6 +45,11 @@ script = ExtResource("5_wfgjq")
 [node name="WarningSFX" type="AudioStreamPlayer2D" parent="PlaneWarning/Warning" unique_id=935881795]
 unique_name_in_owner = true
 stream = ExtResource("6_1qgfg")
+
+[node name="System" type="Node" parent="." unique_id=1713630000]
+
+[node name="Curves" parent="System" unique_id=1083773608 instance=ExtResource("7_tnvfq")]
+unique_name_in_owner = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]

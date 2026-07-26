@@ -1,9 +1,9 @@
 extends Sprite2D
 
 @onready var warning_sfx: AudioStreamPlayer2D = %WarningSFX
+@onready var curves: Node = %Curves
 
 var plane_id :int = 0
-var angle: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,9 +13,8 @@ func _bind_events():
 	EventBus.sigPlaneWarningStart.connect(_on_plane_warning_start)
 	EventBus.sigPlaneWarningEnd.connect(_on_plane_warning_end)
 
-func _process(delta):
-	angle += delta * 5.0
-	var transparency = sin(angle) * 0.4 + 0.6
+func _process(_delta):
+	var transparency = curves.get_pulse()
 	self_modulate = Color(1.0, 0, 0, transparency) 
 
 func set_plane_id(id: int):

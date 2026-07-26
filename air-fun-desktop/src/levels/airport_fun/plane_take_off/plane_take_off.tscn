@@ -1,23 +1,88 @@
 [gd_scene format=3 uid="uid://b2r563y0n07br"]
 
 [ext_resource type="Script" uid="uid://boxcf4rpdby0x" path="res://src/levels/airport_fun/plane_take_off/plane_take_off.gd" id="1_8tfo6"]
+[ext_resource type="Script" uid="uid://bt7v65ox47bam" path="res://src/levels/airport_fun/plane_take_off/plane_info.gd" id="2_4qt1b"]
 [ext_resource type="Script" uid="uid://bv71m3sgutdao" path="res://src/core/common/fsm/state_machine.gd" id="2_bbg5g"]
 [ext_resource type="Script" uid="uid://qlvy26uewffy" path="res://src/levels/airport_fun/plane_take_off/states/parked.gd" id="3_4qt1b"]
 [ext_resource type="Script" uid="uid://dj8uoiator758" path="res://src/levels/airport_fun/plane_take_off/states/ready_to_fly.gd" id="4_ei6ur"]
 [ext_resource type="Script" uid="uid://biv2p1vx54fqb" path="res://src/levels/airport_fun/plane_take_off/states/taxi.gd" id="5_b16j2"]
+[ext_resource type="Texture2D" uid="uid://bxopoqnvjjhc5" path="res://assets/2D/trajectory.png" id="7_h4202"]
+[ext_resource type="Script" uid="uid://fp1dbrkd7pxo" path="res://src/levels/random_fun/plane_path/target.gd" id="8_4c65u"]
+[ext_resource type="Texture2D" uid="uid://f4nslmp2rwdn" path="res://assets/2D/crosshair062.png" id="9_ipgeo"]
+[ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="10_61n7s"]
+[ext_resource type="Script" uid="uid://r2umcv0vlwqn" path="res://src/levels/random_fun/plane_path/select_target.gd" id="11_q3hu8"]
+[ext_resource type="PackedScene" uid="uid://c4qclj41y431i" path="res://src/entities/planes/plane/plane.tscn" id="12_x2k88"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_de6uc"]
+radius = 9.0
 
 [node name="PlaneTakeOff" type="Node2D" unique_id=977051196]
 script = ExtResource("1_8tfo6")
 
-[node name="StateMachine" type="Node" parent="." unique_id=1288143687]
+[node name="PlaneInfo" type="Node" parent="." unique_id=251576845]
+unique_name_in_owner = true
+script = ExtResource("2_4qt1b")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1288143687 node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
 script = ExtResource("2_bbg5g")
+initial_state = NodePath("New")
 
 [node name="Parked" type="Node" parent="StateMachine" unique_id=1666793388]
+unique_name_in_owner = true
 script = ExtResource("3_4qt1b")
 
 [node name="ReadyToFly" type="Node" parent="StateMachine" unique_id=338753505]
+unique_name_in_owner = true
 script = ExtResource("4_ei6ur")
 
 [node name="Taxi" type="Node" parent="StateMachine" unique_id=665003015]
+unique_name_in_owner = true
 script = ExtResource("5_b16j2")
+
+[node name="New" type="Node" parent="StateMachine" unique_id=1403654948]
+unique_name_in_owner = true
+script = ExtResource("5_b16j2")
+
+[node name="Trajectory" type="Line2D" parent="." unique_id=503828284]
+unique_name_in_owner = true
+visible = false
+texture_repeat = 2
+points = PackedVector2Array(65, 93, 131, 60, 199, 49, 277, 104, 281, 132)
+width = 25.0
+texture = ExtResource("7_h4202")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Target" type="Area2D" parent="." unique_id=482515772 groups=["target"]]
+unique_name_in_owner = true
+collision_layer = 2
+input_pickable = false
+script = ExtResource("8_4c65u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target" unique_id=1952400362]
+shape = SubResource("CircleShape2D_de6uc")
+
+[node name="TargetImage" type="Sprite2D" parent="Target" unique_id=1709448803]
+unique_name_in_owner = true
+texture = ExtResource("9_ipgeo")
+
+[node name="SelectTarget" type="Sprite2D" parent="Target" unique_id=609997855 groups=["select"]]
+visible = false
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("10_61n7s")
+script = ExtResource("11_q3hu8")
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1472997157]
+unique_name_in_owner = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=613776408]
+unique_name_in_owner = true
+loop = false
+
+[node name="Plane" parent="Path2D/PathFollow2D" unique_id=1659998964 instance=ExtResource("12_x2k88")]
+unique_name_in_owner = true
+
+[connection signal="area_entered" from="Target" to="Target" method="_on_area_entered"]

@@ -4,6 +4,10 @@ extends Node
 @warning_ignore("unused_signal") signal sigChangeScene(scene :String)
 @warning_ignore("unused_signal") signal sigPause(is_paused : bool)
 
+# State machine
+@warning_ignore("unused_signal") signal sigEnterState(name : String)
+@warning_ignore("unused_signal") signal sigExitState(name : String)
+
 # Gameplay
 @warning_ignore("unused_signal") signal sigNewGame(game_type :String)
 @warning_ignore("unused_signal") signal sigGameOver()

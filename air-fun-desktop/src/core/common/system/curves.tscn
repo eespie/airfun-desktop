@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d3i24frqtvmu5"]
+
+[ext_resource type="Script" uid="uid://clgoaajvukq8w" path="res://src/core/common/system/curves.gd" id="1_jbnyc"]
+[ext_resource type="Curve" uid="uid://del1jy2w310or" path="res://resources/curves/pulse_curve.tres" id="2_frgkc"]
+
+[node name="Curves" type="Node" unique_id=1083773608]
+script = ExtResource("1_jbnyc")
+pulse_curve = ExtResource("2_frgkc")

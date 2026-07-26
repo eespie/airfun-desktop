@@ -1,8 +1,6 @@
 extends Sprite2D
 
-var angle : float = 0.0
+@onready var curves: Node = %Curves
 
-func _process(delta):
-	angle += delta * 5.0
-	var transparency = sin(angle) * 0.4 + 0.6
-	modulate = Color(1.0, 1.0, 1.0, transparency) 
+func _process(_delta):
+	modulate = Color(1.0, 1.0, 1.0, curves.get_pulse()) 
