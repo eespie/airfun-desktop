@@ -74,7 +74,6 @@ func _on_mouse_button_clicked(mouse: Vector2):
 			if context.selected_runway_name:
 				airport.change_visibility_of_all_runway_selectors(false)
 				airport.DEPARTURE_BY_RW[context.selected_runway_name].show()
-				target.show()
 				EventBus.sigPlaneSelect.emit(false, context.plane_id)
 				EventBus.sigTargetSelect.emit(true, context.plane_id)
 				flight_plan = FlightPlan.TARGET
@@ -85,6 +84,7 @@ func _on_mouse_button_clicked(mouse: Vector2):
 				EventBus.sigPlaneSelect.emit(true, context.plane_id)
 				plane.highlight(false)
 				airport.change_visibility_of_all_runway_selectors(true)
+				target.show()
 				flight_plan = FlightPlan.RUNWAY
 				
 
