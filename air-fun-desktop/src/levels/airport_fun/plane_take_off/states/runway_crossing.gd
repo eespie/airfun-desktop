@@ -1,9 +1,9 @@
 extends State
 
-var next_state = null
+var next_state
 
 func enter() -> void:
-	pass
+	next_state = null
 	
 func exit() -> void:
 	pass

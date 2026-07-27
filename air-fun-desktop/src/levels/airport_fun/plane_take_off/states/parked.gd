@@ -15,6 +15,7 @@ extends State
 var next_state
 
 var airport: Node2D
+var last_point: Vector2 = Vector2(0, 0)
 
 enum FlightPlan {PLANE, RUNWAY, TARGET, TARGET_DRAW, READY}
 var flight_plan: FlightPlan
@@ -29,19 +30,22 @@ func enter() -> void:
 	plane.highlight(true)
 	EventBus.sigPlaneSelect.connect(_on_plane_select)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
+	EventBus.sigMouseDrag.connect(_on_mouse_drag)
+	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	
 func exit() -> void:
 	EventBus.sigPlaneSelect.disconnect(_on_plane_select)
 	EventBus.sigMouseButtonClicked.disconnect(_on_mouse_button_clicked)
+	EventBus.sigMouseDrag.disconnect(_on_mouse_drag)
+	EventBus.sigMouseButtonReleased.disconnect(_on_mouse_button_released)
 	plane.highlight(false)
 	
 func process_frame(_delta: float) -> State:
 	# Trajectory
-	trajectory.clear_points()
 	if flight_plan == FlightPlan.TARGET_DRAW:
-		trajectory.show()
+		trajectory.clear_points()
 		var points = context.flight_curve.get_baked_points()
-		var curve_index: int = points.size() - 2
+		var curve_index: int = points.size()
 		while curve_index > 0:
 			curve_index -= 1
 			trajectory.add_point(points[curve_index])
@@ -62,6 +66,7 @@ func _on_mouse_button_clicked(mouse: Vector2):
 				context.flight_curve.clear_points()
 				context.flight_curve.bake_interval = segment_length
 				context.flight_curve.add_point(departure_pos)
+				last_point = mouse
 				flight_plan = FlightPlan.TARGET_DRAW
 				
 		FlightPlan.RUNWAY:
@@ -82,6 +87,33 @@ func _on_mouse_button_clicked(mouse: Vector2):
 				airport.change_visibility_of_all_runway_selectors(true)
 				flight_plan = FlightPlan.RUNWAY
 				
+
+func _on_mouse_drag(mouse: Vector2):
+	if flight_plan != FlightPlan.TARGET_DRAW:
+		return
+	
+		# Mouse arrive on target
+	if target.position.distance_to(mouse) < 32:
+		context.flight_curve.add_point(target.position)
+		context.smooth_curve()
+		flight_plan = FlightPlan.READY
+		EventBus.sigTargetSelect.emit(false, context.plane_id)
+		airport.DEPARTURE_BY_RW[context.selected_runway_name].hide()
+		return
+		
+	if last_point.distance_to(mouse) < segment_length:
+		return
+	last_point = mouse
+	
+	context.flight_curve.add_point(mouse)
+	context.smooth_curve()
+	
+func _on_mouse_button_released(_mouse: Vector2):
+	if flight_plan != FlightPlan.TARGET_DRAW:
+		return
+	context.flight_curve.clear_points()
+	trajectory.clear_points()
+	flight_plan = FlightPlan.TARGET
 
 func _select_runway(mouse: Vector2) -> void:
 	for rw in airport.SELECT_RUNWAY:

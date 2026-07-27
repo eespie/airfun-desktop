@@ -3,6 +3,7 @@ extends Node2D
 var full_duration: float = 0.0
 var elapsed: float = 0.0
 
+@onready var explode_sfx: AudioStreamPlayer2D = %ExplodeSFX
 @onready var images = [
 	$Explosion00,
 	$Explosion01,
@@ -49,7 +50,8 @@ func explode(duration: float = 0.5):
 	get_children().all(hide_image)
 	full_duration = duration
 	elapsed = 0.0
-	Sound.play_sfx($ExplodeSFX)
+	if not explode_sfx.playing:
+		explode_sfx.play()
 
 func hide_image(image):
 	image.hide()

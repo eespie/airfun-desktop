@@ -1,6 +1,6 @@
 extends State
 
-var next_state = null
+var next_state
 
 @onready var plane: Node2D = %Plane
 @onready var path_2d: Path2D = %Path2D
@@ -10,13 +10,12 @@ var next_state = null
 @onready var ready_to_align: State = %ReadyToAlign
 @onready var runway_crossing: State = %RunwayCrossing
 
-@export var taxi_speed: float = 20
-
 var curr_taxi_path: int = 0
 var curve: Curve2D
 var progress: float = 0.0
 
 func enter() -> void:
+	next_state = null
 	curr_taxi_path = context.curr_taxi_path
 	curve = path_2d.get_curve()
 	
@@ -27,13 +26,14 @@ func process_frame(delta: float) -> State:
 	var curve_len = curve.get_baked_length()
 	if curve_len < 2:
 		return
-	progress += delta * taxi_speed
+	progress += delta * context.taxi_speed
 	if progress > curve_len:
 		curr_taxi_path += 1
 		var slot = context.parking_slot
 		context.airport.set_parking_slot_available(slot)
 		var rw = context.selected_runway_name
 		if curr_taxi_path == context.airport.TAXI_BY_SLOT_AND_RW[slot][rw].size():
+			plane.highlight(true)
 			next_state = ready_to_align
 		else:
 			next_state = runway_crossing

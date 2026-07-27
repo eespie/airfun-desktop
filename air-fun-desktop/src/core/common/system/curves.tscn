@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://clgoaajvukq8w" path="res://src/core/common/system/curves.gd" id="1_jbnyc"]
 [ext_resource type="Curve" uid="uid://del1jy2w310or" path="res://resources/curves/pulse_curve.tres" id="2_frgkc"]
 
+[sub_resource type="Curve" id="Curve_de6uc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49878928, 0.97590363), 0.0, 0.0, 0, 0, Vector2(0.9927361, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Curves" type="Node" unique_id=1083773608]
 script = ExtResource("1_jbnyc")
 pulse_curve = ExtResource("2_frgkc")
+takeoff_curve = SubResource("Curve_de6uc")

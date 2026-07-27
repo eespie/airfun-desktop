@@ -5,6 +5,7 @@ extends Node2D
 @onready var plane: Node2D = %Plane
 @onready var parked: State = %Parked
 @onready var target: Area2D = %Target
+@onready var trajectory: Line2D = %Trajectory
 
 var plane_selected: int = 0
 var plane_id: int = 0
@@ -16,15 +17,17 @@ func _ready():
 	_bind_events()
 	
 func _bind_events():
-	pass
+	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
 	
 func init(id: int, airport: Node2D, slot: String, plane_model: int, target_pos: Vector2)-> void:
+	plane_id = id
 	plane.set_model(plane_model)
 	plane_info.init(id, airport, slot)
 	plane.set_color(plane_info.plane_color)
 	state_machine.change_state(parked)
 	target.set_position(target_pos)
 	target.set_color(plane_info.plane_color)
+	trajectory.modulate = plane_info.plane_color
 	propagate_call("set_plane_id", [id])
 
 func _process(delta):
@@ -35,3 +38,7 @@ func _physics_process(delta):
 	
 func _input(event):
 	state_machine.process_input(event)
+
+func _on_plane_arrived(id: int):
+	if plane_id == id:
+		queue_free()

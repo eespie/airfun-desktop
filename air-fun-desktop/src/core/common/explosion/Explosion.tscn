@@ -53,5 +53,6 @@ visible = false
 texture = ExtResource("10_nbae6")
 
 [node name="ExplodeSFX" type="AudioStreamPlayer2D" parent="." unique_id=1572858684]
+unique_name_in_owner = true
 stream = ExtResource("11_84s67")
 bus = &"SFX"

@@ -1,6 +1,7 @@
 extends Node
 
 @export var pulse_curve : Curve
+@export var takeoff_curve : Curve
 
 func get_pulse() -> float:
 	var step = Time.get_ticks_usec() / 1000000.0
@@ -8,3 +9,6 @@ func get_pulse() -> float:
 	var value = pulse_curve.sample_baked(offset)
 	
 	return value
+
+func get_takeoff(offset: float) ->float:
+	return takeoff_curve.sample_baked(offset)

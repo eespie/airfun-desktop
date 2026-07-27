@@ -12,9 +12,13 @@
 [ext_resource type="Script" uid="uid://beuvh4nijyofq" path="res://src/levels/airport_fun/plane_take_off/states/runway_crossing.gd" id="9_61n7s"]
 [ext_resource type="Texture2D" uid="uid://f4nslmp2rwdn" path="res://assets/2D/crosshair062.png" id="9_ipgeo"]
 [ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="10_61n7s"]
+[ext_resource type="Script" uid="uid://c303fraujj6ew" path="res://src/levels/airport_fun/plane_take_off/states/align.gd" id="10_q3hu8"]
 [ext_resource type="Script" uid="uid://bmjosld3orylu" path="res://src/levels/airport_fun/plane_take_off/target.gd" id="11_61n7s"]
+[ext_resource type="Script" uid="uid://drpvn2mnmxes6" path="res://src/levels/airport_fun/plane_take_off/states/take_off.gd" id="11_x2k88"]
+[ext_resource type="Script" uid="uid://ekbiafw17gch" path="res://src/levels/airport_fun/plane_take_off/states/fly.gd" id="12_de6uc"]
 [ext_resource type="PackedScene" uid="uid://c4qclj41y431i" path="res://src/entities/planes/plane/plane.tscn" id="12_x2k88"]
 [ext_resource type="Script" uid="uid://dsletkocavben" path="res://src/levels/airport_fun/plane_take_off/select_target.gd" id="14_61n7s"]
+[ext_resource type="PackedScene" uid="uid://d3i24frqtvmu5" path="res://src/core/common/system/curves.tscn" id="19_g41d6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_de6uc"]
 radius = 9.0
@@ -62,9 +66,23 @@ unique_name_in_owner = true
 script = ExtResource("9_61n7s")
 metadata/_custom_type_script = "uid://m7aw8gnjj6go"
 
+[node name="Align" type="Node" parent="StateMachine" unique_id=1459788057]
+unique_name_in_owner = true
+script = ExtResource("10_q3hu8")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="TakeOff" type="Node" parent="StateMachine" unique_id=1751266746]
+unique_name_in_owner = true
+script = ExtResource("11_x2k88")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="Fly" type="Node" parent="StateMachine" unique_id=1535439159]
+unique_name_in_owner = true
+script = ExtResource("12_de6uc")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
 [node name="Trajectory" type="Line2D" parent="." unique_id=503828284]
 unique_name_in_owner = true
-visible = false
 texture_repeat = 2
 width = 25.0
 texture = ExtResource("7_h4202")
@@ -101,6 +119,9 @@ unique_name_in_owner = true
 loop = false
 
 [node name="Plane" parent="Path2D/PathFollow2D" unique_id=1659998964 instance=ExtResource("12_x2k88")]
+unique_name_in_owner = true
+
+[node name="Curves" parent="." unique_id=1083773608 instance=ExtResource("19_g41d6")]
 unique_name_in_owner = true
 
 [connection signal="area_entered" from="Target" to="Target" method="_on_area_entered"]

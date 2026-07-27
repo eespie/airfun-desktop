@@ -52,4 +52,5 @@ func _on_mouse_button_released(_mouse: Vector2):
 	next_state = parked
 	
 func _on_plane_selected_long(id: int):
-	next_state = taxi
+	if id == context.plane_id:
+		next_state = taxi
