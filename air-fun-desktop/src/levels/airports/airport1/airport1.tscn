@@ -11,8 +11,10 @@
 [ext_resource type="Curve2D" uid="uid://cbw3d640titpv" path="res://resources/curves/airport1/path_taxi_2___1.tres" id="6_rytj0"]
 [ext_resource type="Curve2D" uid="uid://dirkjempcqkuj" path="res://resources/curves/airport1/path_align_1.tres" id="7_rytj0"]
 [ext_resource type="Curve2D" uid="uid://bmay1b34ywo0a" path="res://resources/curves/airport1/path_takeoff_1.tres" id="8_2q050"]
+[ext_resource type="Curve2D" uid="uid://bqpb1f224egds" path="res://resources/curves/airport1/path_taxi_1___2.tres" id="8_31ft8"]
 [ext_resource type="Curve2D" uid="uid://cd3y7djw10kho" path="res://resources/curves/airport1/path_align_2.tres" id="9_50nip"]
 [ext_resource type="Curve2D" uid="uid://b0amrudbyw5r" path="res://resources/curves/airport1/path_takeoff_2.tres" id="11_ksqfn"]
+[ext_resource type="Curve2D" uid="uid://nunmdwy2tap1" path="res://resources/curves/airport1/path_taxi_2___2.tres" id="12_81xyn"]
 
 [sub_resource type="Gradient" id="Gradient_l2ntc"]
 interpolation_mode = 1
@@ -153,35 +155,35 @@ position = Vector2(-1, 1)
 [node name="ParkingSlot1" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=952327902]
 unique_name_in_owner = true
 visible = false
-position = Vector2(135, 175)
+position = Vector2(135, 250)
 rotation = 3.1415927
 texture = ExtResource("4_j545i")
 
 [node name="ParkingSlot2" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1893567667]
 unique_name_in_owner = true
 visible = false
-position = Vector2(235, 175)
+position = Vector2(235, 250)
 rotation = 3.1415927
 texture = ExtResource("4_j545i")
 
 [node name="ParkingSlot3" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1446511925]
 unique_name_in_owner = true
 visible = false
-position = Vector2(335, 175)
+position = Vector2(335, 250)
 rotation = 3.1415927
 texture = ExtResource("4_j545i")
 
 [node name="ParkingSlot4" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1621039173]
 unique_name_in_owner = true
 visible = false
-position = Vector2(435, 175)
+position = Vector2(435, 250)
 rotation = 3.1415927
 texture = ExtResource("4_j545i")
 
 [node name="ParkingSlot5" type="Sprite2D" parent="Root/Runway/ParkingSlots" unique_id=1565205200]
 unique_name_in_owner = true
 visible = false
-position = Vector2(535, 175)
+position = Vector2(535, 250)
 rotation = 3.1415927
 texture = ExtResource("4_j545i")
 
@@ -190,6 +192,10 @@ texture = ExtResource("4_j545i")
 [node name="Path Taxi 1 - 1" type="Path2D" parent="Path" unique_id=286759538]
 unique_name_in_owner = true
 curve = ExtResource("5_qoy1x")
+
+[node name="Path Taxi 1 - 2" type="Path2D" parent="Path" unique_id=659504324]
+unique_name_in_owner = true
+curve = ExtResource("8_31ft8")
 
 [node name="Path Align 1" type="Path2D" parent="Path" unique_id=575898512]
 unique_name_in_owner = true
@@ -203,6 +209,10 @@ curve = ExtResource("8_2q050")
 unique_name_in_owner = true
 curve = ExtResource("6_rytj0")
 
+[node name="Path Taxi 2 - 2" type="Path2D" parent="Path" unique_id=1575499406]
+unique_name_in_owner = true
+curve = ExtResource("12_81xyn")
+
 [node name="Path Align 2" type="Path2D" parent="Path" unique_id=751747158]
 unique_name_in_owner = true
 curve = ExtResource("9_50nip")
@@ -215,3 +225,9 @@ curve = ExtResource("11_ksqfn")
 
 [node name="Curves" parent="System" unique_id=1083773608 instance=ExtResource("6_qoy1x")]
 unique_name_in_owner = true
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1175780176]
+position = Vector2(658, 637)
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=1150453840]
+position = Vector2(1262, 637)

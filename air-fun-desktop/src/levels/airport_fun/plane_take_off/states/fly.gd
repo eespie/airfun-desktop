@@ -15,6 +15,8 @@ func enter() -> void:
 	path_2d.set_curve(curve)
 	path_follow_2d.set_progress(0)
 	progress = 0.0
+	plane.allow_collisions(true, false)
+
 	
 func exit() -> void:
 	pass

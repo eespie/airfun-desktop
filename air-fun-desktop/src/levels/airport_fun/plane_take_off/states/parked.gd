@@ -28,6 +28,7 @@ func enter() -> void:
 	airport = context.airport
 	plane.global_position = context.get_slot_pos()
 	plane.highlight(true)
+	plane.allow_collisions(true, true)
 	EventBus.sigPlaneSelect.connect(_on_plane_select)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseDrag.connect(_on_mouse_drag)

@@ -37,8 +37,8 @@ func set_model(type : int):
 	select_plane_long.resize(plane_model.plane_select_scale)
 	plane_speed = floorf(plane_model.plane_speed)
 
-func allow_collisions(flag : bool):
-	plane_model.allow_collisions(flag)
+func allow_collisions(flag : bool, is_grounded: bool = false):
+	plane_model.allow_collisions(flag, is_grounded)
 
 func set_color(color : Color):
 	plane_model.set_color(color)
