@@ -26,7 +26,7 @@ func exit() -> void:
 	pass
 
 func get_plane_takeoff_speed() -> float:
-	return curves.get_takeoff(path_follow_2d.get_progress_ratio()) * (plane.plane_speed - context.taxi_speed) + context.taxi_speed
+	return curves.get_takeoff_speed(path_follow_2d.get_progress_ratio()) * (plane.plane_speed - context.taxi_speed) + context.taxi_speed
 	
 func process_frame(delta: float) -> State:
 	var curve_len = curve.get_baked_length()

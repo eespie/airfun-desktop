@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dbu033tn423er"]
 
 [ext_resource type="Script" uid="uid://blu53mk1iibvb" path="res://src/levels/airport_fun/airport_fun.gd" id="1_l2ntc"]
+[ext_resource type="PackedScene" uid="uid://d3i24frqtvmu5" path="res://src/core/common/system/curves.tscn" id="2_l2ntc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tmw7w"]
 radius = 5.0
@@ -30,6 +31,9 @@ wait_time = 2.0
 one_shot = true
 
 [node name="GameOverTimer" type="Timer" parent="System" unique_id=2104322530]
+unique_name_in_owner = true
+
+[node name="Curves" parent="System" unique_id=1083773608 instance=ExtResource("2_l2ntc")]
 unique_name_in_owner = true
 
 [connection signal="timeout" from="System/PlanePopTimer" to="." method="_on_plane_pop_timer_timeout"]

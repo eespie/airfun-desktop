@@ -18,7 +18,7 @@ func set_context(ctx : Node) -> void:
 	
 # Change to the new state by first calling any exit logic on the current state.
 func change_state(new_state: State) -> void:
-	print("Changing to state: ", new_state)
+	#print("Changing to state: ", new_state)
 	if current_state:
 		current_state.exit()
 		EventBus.sigExitState.emit(current_state.get_name())

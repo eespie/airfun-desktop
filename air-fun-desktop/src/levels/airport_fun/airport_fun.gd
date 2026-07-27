@@ -5,6 +5,7 @@ extends Node2D
 @onready var planes_root: Node2D = %PlanesRoot
 @onready var plane_pop_timer: Timer = %PlanePopTimer
 @onready var game_over_timer: Timer = %GameOverTimer
+@onready var curves: Node = %Curves
 
 const PLANE_TAKE_OFF = preload("uid://b2r563y0n07br")
 
@@ -55,7 +56,7 @@ func _on_plane_pop_timer_timeout() -> void:
 	var slot = airport.get_available_parking_slot()
 	if slot == "":
 		# no avaliable slot
-		EventBus.sigNewPlaneTimer.emit(5.0)
+		EventBus.sigNewPlaneTimer.emit(curves.get_takeoff_wait_time(plane_id))
 		return
 	
 	plane_id += 1
@@ -65,7 +66,7 @@ func _on_plane_pop_timer_timeout() -> void:
 	var target_pos = _get_target_pos()
 	plane.init(plane_id, airport, slot, 0, target_pos)
 	
-	EventBus.sigNewPlaneTimer.emit(5.0)
+	EventBus.sigNewPlaneTimer.emit(curves.get_takeoff_wait_time(plane_id))
 
 func _on_unselect_all_planes():
 	for id in range(1, plane_id + 1):

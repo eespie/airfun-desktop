@@ -7,7 +7,13 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49878928, 0.97590363), 0.0, 0.0, 0, 0, Vector2(0.9927361, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="Curve" id="Curve_l2ntc"]
+_limits = [0.0, 20.0, 0.0, 30.0]
+_data = [Vector2(0, 19.638554), 0.0, 0.0, 0, 0, Vector2(7.293233, 17.749998), -0.706259, -0.706259, 0, 0, Vector2(22.51816, 3.125), -1.0292425, -1.0292425, 0, 0, Vector2(29.927362, 0.12048149), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="Curves" type="Node" unique_id=1083773608]
 script = ExtResource("1_jbnyc")
 pulse_curve = ExtResource("2_frgkc")
 takeoff_curve = SubResource("Curve_de6uc")
+takeoff_wait_time_curve = SubResource("Curve_l2ntc")

@@ -84,10 +84,16 @@ func list_runway_to_select():
 	return SELECT_RUNWAY
 
 func get_available_parking_slot() -> String:
+	var availabe_slots: Array = []
 	for slot in parking_slots_status:
 		if parking_slots_status[slot] == ParkingStatus.AVAILABLE:
-			parking_slots_status[slot] = ParkingStatus.USED
-			return slot
+			availabe_slots.append(slot)
+	
+	if availabe_slots.size() > 0:
+		var slot = availabe_slots[randi_range(0, availabe_slots.size() - 1)]
+		parking_slots_status[slot] = ParkingStatus.USED
+		return slot
+		
 	return ""
 
 func set_parking_slot_available(slot: String) -> void:

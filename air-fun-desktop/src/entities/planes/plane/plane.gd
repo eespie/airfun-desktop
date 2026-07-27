@@ -15,12 +15,14 @@ const PLANE_MODELS = [A_321, A_380, CONCORDE, Q_400]
 var plane_id :int = 0
 var plane_model
 var plane_speed : float
+var creation_time
 
 func _ready() -> void:
 	_bind_events()
+	creation_time = Time.get_ticks_msec()
 	
 func _bind_events():
-	pass
+	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
 	
 func set_plane_id(id: int):
 	plane_id = id
@@ -48,3 +50,8 @@ func highlight(flag : bool):
 		highlight_plane.show()
 	else:
 		highlight_plane.hide()
+
+func _on_plane_arrived(id: int):
+	if plane_id == id:
+		var duration = (Time.get_ticks_msec() - creation_time) / 1000.0
+		print("Plane " + str(plane_id) + " duration " + str(duration))
