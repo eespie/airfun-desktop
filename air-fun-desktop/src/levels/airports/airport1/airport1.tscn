@@ -11,10 +11,15 @@
 [ext_resource type="Curve2D" uid="uid://cbw3d640titpv" path="res://resources/curves/airport1/path_taxi_2___1.tres" id="6_rytj0"]
 [ext_resource type="Curve2D" uid="uid://dirkjempcqkuj" path="res://resources/curves/airport1/path_align_1.tres" id="7_rytj0"]
 [ext_resource type="Curve2D" uid="uid://bmay1b34ywo0a" path="res://resources/curves/airport1/path_takeoff_1.tres" id="8_2q050"]
-[ext_resource type="Curve2D" uid="uid://bqpb1f224egds" path="res://resources/curves/airport1/path_taxi_1___2.tres" id="8_31ft8"]
+[ext_resource type="Curve2D" uid="uid://cmqai6yeswt55" path="res://resources/curves/airport1/path_taxi_1___5.tres" id="8_mbh1h"]
 [ext_resource type="Curve2D" uid="uid://cd3y7djw10kho" path="res://resources/curves/airport1/path_align_2.tres" id="9_50nip"]
 [ext_resource type="Curve2D" uid="uid://b0amrudbyw5r" path="res://resources/curves/airport1/path_takeoff_2.tres" id="11_ksqfn"]
 [ext_resource type="Curve2D" uid="uid://nunmdwy2tap1" path="res://resources/curves/airport1/path_taxi_2___2.tres" id="12_81xyn"]
+[ext_resource type="Curve2D" uid="uid://bqeyc5a7c0nkp" path="res://resources/curves/airport1/path_taxi_1___3.tres" id="15_srirt"]
+[ext_resource type="Curve2D" uid="uid://cuhownuwomho1" path="res://resources/curves/airport1/path_taxi_1___4.tres" id="16_ichja"]
+[ext_resource type="Curve2D" uid="uid://ctawdv2136x35" path="res://resources/curves/airport1/path_taxi_2___3.tres" id="17_yrqhj"]
+[ext_resource type="Curve2D" uid="uid://b3cnpibi00y5b" path="res://resources/curves/airport1/path_taxi_2___4.tres" id="18_etvw8"]
+[ext_resource type="Curve2D" uid="uid://cqjylxcuc1pm8" path="res://resources/curves/airport1/path_taxi_2___5.tres" id="19_pkqb1"]
 
 [sub_resource type="Gradient" id="Gradient_l2ntc"]
 interpolation_mode = 1
@@ -195,7 +200,7 @@ curve = ExtResource("5_qoy1x")
 
 [node name="Path Taxi 1 - 2" type="Path2D" parent="Path" unique_id=659504324]
 unique_name_in_owner = true
-curve = ExtResource("8_31ft8")
+curve = ExtResource("8_mbh1h")
 
 [node name="Path Align 1" type="Path2D" parent="Path" unique_id=575898512]
 unique_name_in_owner = true
@@ -220,6 +225,30 @@ curve = ExtResource("9_50nip")
 [node name="Path Takeoff 2" type="Path2D" parent="Path" unique_id=858209880]
 unique_name_in_owner = true
 curve = ExtResource("11_ksqfn")
+
+[node name="Path Taxi 1 - 3" type="Path2D" parent="Path" unique_id=1278303314]
+unique_name_in_owner = true
+curve = ExtResource("15_srirt")
+
+[node name="Path Taxi 1 - 4" type="Path2D" parent="Path" unique_id=939859009]
+unique_name_in_owner = true
+curve = ExtResource("16_ichja")
+
+[node name="Path Taxi 1 - 5" type="Path2D" parent="Path" unique_id=220835833]
+unique_name_in_owner = true
+curve = ExtResource("8_mbh1h")
+
+[node name="Path Taxi 2 - 3" type="Path2D" parent="Path" unique_id=117090379]
+unique_name_in_owner = true
+curve = ExtResource("17_yrqhj")
+
+[node name="Path Taxi 2 - 4" type="Path2D" parent="Path" unique_id=322711478]
+unique_name_in_owner = true
+curve = ExtResource("18_etvw8")
+
+[node name="Path Taxi 2 - 5" type="Path2D" parent="Path" unique_id=1350450833]
+unique_name_in_owner = true
+curve = ExtResource("19_pkqb1")
 
 [node name="System" type="Node" parent="." unique_id=1445931148]
 

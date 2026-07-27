@@ -46,9 +46,18 @@ var TAXI_BY_SLOT_AND_RW = {
 		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___2.tres"],
 		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___2.tres"],
 	},
-	"slot3" : {},
-	"slot4" : {},
-	"slot5" : {},
+	"slot3" : {
+		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___3.tres"],
+		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___3.tres"],
+	},
+	"slot4" : {
+		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___4.tres"],
+		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___4.tres"],
+	},
+	"slot5" : {
+		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___5.tres"],
+		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___5.tres"],
+	},
 }
 
 var ALIGN_BY_RW = {
@@ -66,9 +75,9 @@ enum ParkingStatus {AVAILABLE, USED, UNAVAILABLE}
 var parking_slots_status = {
 	"slot1" : ParkingStatus.AVAILABLE,
 	"slot2" : ParkingStatus.AVAILABLE,
-	"slot3" : ParkingStatus.UNAVAILABLE,
-	"slot4" : ParkingStatus.UNAVAILABLE,
-	"slot5" : ParkingStatus.UNAVAILABLE,
+	"slot3" : ParkingStatus.AVAILABLE,
+	"slot4" : ParkingStatus.AVAILABLE,
+	"slot5" : ParkingStatus.AVAILABLE,
 }
 
 func list_runway_to_select():
