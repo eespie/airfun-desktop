@@ -11,6 +11,7 @@
 [ext_resource type="Curve2D" uid="uid://cbw3d640titpv" path="res://resources/curves/airport1/path_taxi_2___1.tres" id="6_rytj0"]
 [ext_resource type="Curve2D" uid="uid://dirkjempcqkuj" path="res://resources/curves/airport1/path_align_1.tres" id="7_rytj0"]
 [ext_resource type="Curve2D" uid="uid://bmay1b34ywo0a" path="res://resources/curves/airport1/path_takeoff_1.tres" id="8_2q050"]
+[ext_resource type="Curve2D" uid="uid://bqpb1f224egds" path="res://resources/curves/airport1/path_taxi_1___2.tres" id="8_31ft8"]
 [ext_resource type="Curve2D" uid="uid://cmqai6yeswt55" path="res://resources/curves/airport1/path_taxi_1___5.tres" id="8_mbh1h"]
 [ext_resource type="Curve2D" uid="uid://cd3y7djw10kho" path="res://resources/curves/airport1/path_align_2.tres" id="9_50nip"]
 [ext_resource type="Curve2D" uid="uid://b0amrudbyw5r" path="res://resources/curves/airport1/path_takeoff_2.tres" id="11_ksqfn"]
@@ -200,7 +201,7 @@ curve = ExtResource("5_qoy1x")
 
 [node name="Path Taxi 1 - 2" type="Path2D" parent="Path" unique_id=659504324]
 unique_name_in_owner = true
-curve = ExtResource("8_mbh1h")
+curve = ExtResource("8_31ft8")
 
 [node name="Path Align 1" type="Path2D" parent="Path" unique_id=575898512]
 unique_name_in_owner = true

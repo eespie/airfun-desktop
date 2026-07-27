@@ -13,6 +13,7 @@ extends Node
 @warning_ignore("unused_signal") signal sigGameOver()
 @warning_ignore("unused_signal") signal sigAddScore(points :int)
 @warning_ignore("unused_signal") signal sigNewHighScore(points :int)
+@warning_ignore("unused_signal") signal sigMessageDisplay(message :String)
 
 # Planes
 @warning_ignore("unused_signal") signal sigNewPlaneTimer()
@@ -28,6 +29,9 @@ extends Node
 @warning_ignore("unused_signal") signal sigPlaneWarningEnd(id :int)
 
 @warning_ignore("unused_signal") signal sigTargetSelect(selected :bool, id :int)
+
+@warning_ignore("unused_signal") signal sigMouseOverPlaneStart(id :int)
+@warning_ignore("unused_signal") signal sigMouseOverPlaneStop(id :int)
 
 
 # Mouse

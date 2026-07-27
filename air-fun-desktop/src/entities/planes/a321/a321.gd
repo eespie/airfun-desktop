@@ -38,3 +38,11 @@ func allow_collisions(flag: bool, is_grounded: bool = false):
 		
 func set_color(color : Color):
 	plane_image.modulate = color
+
+
+func _on_mouse_entered() -> void:
+	EventBus.sigMouseOverPlaneStart.emit(plane_id)
+
+
+func _on_mouse_exited() -> void:
+	EventBus.sigMouseOverPlaneStop.emit(plane_id)

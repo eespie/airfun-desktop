@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cmbjhfnq62m6q" path="res://src/ui/hud/score.gd" id="1_cvkdw"]
 [ext_resource type="Script" uid="uid://daf47qyenihvt" path="res://src/ui/hud/high_score.gd" id="2_udh2q"]
+[ext_resource type="Script" uid="uid://c8hfg31s3f2x7" path="res://src/ui/hud/message.gd" id="3_udh2q"]
 
 [node name="Hud" type="Control" unique_id=2044944281]
 layout_mode = 3
@@ -38,3 +39,7 @@ size_flags_vertical = 0
 theme_type_variation = &"LabelSmall"
 text = "High Score 0"
 script = ExtResource("2_udh2q")
+
+[node name="Message" type="Label" parent="MarginContainer" unique_id=245518310]
+layout_mode = 2
+script = ExtResource("3_udh2q")

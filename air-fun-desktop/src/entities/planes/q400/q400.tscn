@@ -53,5 +53,7 @@ unique_name_in_owner = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="area_entered" from="PlaneWarning" to="PlaneWarning" method="_on_area_entered"]
 [connection signal="area_exited" from="PlaneWarning" to="PlaneWarning" method="_on_area_exited"]
