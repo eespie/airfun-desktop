@@ -1,7 +1,7 @@
 extends Node
 
 enum PLANE {A321, A380, Concorde, Q400}
-var allowed_plane_models: Array = [PLANE.A321, PLANE.Q400]
+var allowed_plane_models: Array = [PLANE.A321, PLANE.Q400, PLANE.A380, PLANE.Concorde]
 
 enum SLOT {none, slot1, slot2, slot3, slot4, slot5}
 enum RUNWAY {none, rw1a, rw1b}
@@ -97,3 +97,13 @@ func get_align_path(rw: int) -> Path2D:
 	
 func get_takeoff_path(rw: int) -> Path2D:
 	return path_takeoff_by_runway[rw]
+
+func get_rand_plane_model(offset: int) -> int:
+	var count = allowed_plane_models.size()
+	return allowed_plane_models[randi_range(0, count - 1)]
+	while count > 0:
+		if offset > 10 * count:
+			if randf() > 0.9:
+				return allowed_plane_models[count - 1]
+		count -= 1
+	return allowed_plane_models[0]

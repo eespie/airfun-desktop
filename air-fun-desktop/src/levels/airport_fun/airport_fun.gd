@@ -64,7 +64,8 @@ func _on_plane_pop_timer_timeout() -> void:
 	var plane = PLANE_TAKE_OFF.instantiate()
 	planes_root.add_child(plane)
 	var target_pos = _get_target_pos()
-	plane.init(plane_id, airport, slot, 0, target_pos)
+	var plane_model = airport.get_rand_plane_model(plane_id)
+	plane.init(plane_id, airport, slot, plane_model, target_pos)
 	
 	EventBus.sigNewPlaneTimer.emit(curves.get_takeoff_wait_time(plane_id))
 

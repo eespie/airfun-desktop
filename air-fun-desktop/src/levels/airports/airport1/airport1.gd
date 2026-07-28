@@ -34,3 +34,6 @@ func get_align_path(rw) -> Path2D:
 
 func get_takeoff_path(rw) -> Path2D:
 	return data.get_takeoff_path(rw)
+
+func get_rand_plane_model(offset: int) -> int:
+	return data.get_rand_plane_model(offset)
