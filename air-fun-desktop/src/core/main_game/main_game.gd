@@ -40,8 +40,11 @@ func _bind_events() -> void:
 	EventBus.sigPause.connect(_on_game_paused)
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and mouse_state == mouse_states.CLICKED:
-		EventBus.sigMouseDrag.emit(event.position)
+	if event is InputEventMouseMotion:
+		if mouse_state == mouse_states.CLICKED:
+			EventBus.sigMouseDrag.emit(event.position)
+		else:
+			EventBus.sigMouseMove.emit(event.position)
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			mouse_state = mouse_states.CLICKED

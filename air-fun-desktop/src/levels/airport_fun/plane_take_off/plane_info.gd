@@ -2,20 +2,31 @@ extends Node
 
 var plane_id: int
 var airport: Node2D
-var parking_slot: String
 var plane_color: Color
-var selected_runway_name = null
+var parking_slot
+var selected_runway = null
 var curr_taxi_path: int = 0
 var selected: bool = false
 var flight_curve: Curve2D
-@export var taxi_speed: float = 20
 
-func init(id: int, current_airport: Node2D, slot: String) -> void:
+var start_time: float
+var taxi_time: float
+var expected_taxi_duration: float
+var flight_time: float
+var expected_flight_duration: float
+
+var taxi_speed: float = 20
+
+func init(id: int, current_airport: Node2D, slot: int) -> void:
 	plane_id = id
 	airport = current_airport
 	parking_slot = slot
 	plane_color = Global.get_plane_color(id)
+	start_time = Time.get_ticks_msec()
 	EventBus.sigPlaneSelect.connect(_on_plane_select)
+	EventBus.sigPlaneTakeoff.connect(_on_plane_takeoff)
+	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
+
 
 func get_slot_pos() -> Vector2:
 	return airport.get_slot_pos(parking_slot)
@@ -40,3 +51,13 @@ func _get_spline(i):
 func _get_point(i):
 	i = clampi(i, 0, flight_curve.get_point_count() - 1)
 	return flight_curve.get_point_position(i)
+
+func _on_plane_takeoff(id: int):
+	if id == plane_id:
+		taxi_time = Time.get_ticks_msec()
+
+func _on_plane_arrived(id: int):
+	if id == plane_id:
+		flight_time = Time.get_ticks_msec()
+		#total_duration = snapped((Time.get_ticks_msec() - start_time) / 1000.0, 0.1)
+	

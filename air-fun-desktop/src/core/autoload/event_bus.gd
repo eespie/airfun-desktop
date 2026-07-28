@@ -13,12 +13,15 @@ extends Node
 @warning_ignore("unused_signal") signal sigGameOver()
 @warning_ignore("unused_signal") signal sigAddScore(points :int)
 @warning_ignore("unused_signal") signal sigNewHighScore(points :int)
-@warning_ignore("unused_signal") signal sigMessageDisplay(message :String)
+@warning_ignore("unused_signal") signal sigMessageDisplay(message :String, color: Color)
 
 # Planes
 @warning_ignore("unused_signal") signal sigNewPlaneTimer()
 @warning_ignore("unused_signal") signal sigPlaneCrashed(game :Node2D)
 @warning_ignore("unused_signal") signal sigPlaneArrived(id :int)
+@warning_ignore("unused_signal") signal sigPlaneReleased(id :int)
+@warning_ignore("unused_signal") signal sigPlaneTakeoff(id :int)
+
 
 @warning_ignore("unused_signal") signal sigPlaneSelect(selected :bool, id :int)
 @warning_ignore("unused_signal") signal sigPlaneSelectLongStart(id :int)
@@ -30,11 +33,8 @@ extends Node
 
 @warning_ignore("unused_signal") signal sigTargetSelect(selected :bool, id :int)
 
-@warning_ignore("unused_signal") signal sigMouseOverPlaneStart(id :int)
-@warning_ignore("unused_signal") signal sigMouseOverPlaneStop(id :int)
-
-
 # Mouse
 @warning_ignore("unused_signal") signal sigMouseDrag(pos :Vector2)
+@warning_ignore("unused_signal") signal sigMouseMove(pos :Vector2)
 @warning_ignore("unused_signal") signal sigMouseButtonClicked(pos :Vector2)
 @warning_ignore("unused_signal") signal sigMouseButtonReleased(pos :Vector2)

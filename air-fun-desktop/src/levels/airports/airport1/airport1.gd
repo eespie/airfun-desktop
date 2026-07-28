@@ -1,107 +1,36 @@
 extends Node2D
 
-@onready var parking_slot_1: Sprite2D = %ParkingSlot1
-@onready var parking_slot_2: Sprite2D = %ParkingSlot2
-@onready var parking_slot_3: Sprite2D = %ParkingSlot3
-@onready var parking_slot_4: Sprite2D = %ParkingSlot4
-@onready var parking_slot_5: Sprite2D = %ParkingSlot5
+@onready var data: Node = %Data
 
-@onready var start_1: Sprite2D = %Start1
-@onready var airborne_1: Sprite2D = %Airborne1
-@onready var path_taxi_1___1: Path2D = %"Path Taxi 1 - 1"
-@onready var path_align_1: Path2D = %"Path Align 1"
-@onready var path_takeoff_1: Path2D = %"Path Takeoff 1"
+func get_available_parking_slot():
+	return data.get_available_parking_slot()
 
-@onready var start_2: Sprite2D = %Start2
-@onready var airborne_2: Sprite2D = %Airborne2
-@onready var path_taxi_2___1: Path2D = %"Path Taxi 2 - 1"
-@onready var path_align_2: Path2D = %"Path Align 2"
-@onready var path_takeoff_2: Path2D = %"Path Takeoff 2"
+func set_parking_slot_available(slot) -> void:
+	data.parking_slots_status[slot] = data.ParkingStatus.AVAILABLE
 
+func get_slot_pos(slot) -> Vector2:
+	return data.get_slot_pos(slot)
 
-@onready var SELECT_PARKING = {
-	"slot1" : parking_slot_1,
-	"slot2" : parking_slot_2,
-	"slot3" : parking_slot_3,
-	"slot4" : parking_slot_4,
-	"slot5" : parking_slot_5,
-}
-
-@onready var SELECT_RUNWAY = {
-	"rw1a" : start_1,
-	"rw1b" : start_2,
-}
-
-@onready var DEPARTURE_BY_RW = {
-	"rw1a" : airborne_1,
-	"rw1b" : airborne_2,
-}
-
-var TAXI_BY_SLOT_AND_RW = {
-	"slot1" : {
-		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___1.tres"],
-		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___1.tres"],
-	},
-	"slot2" : {
-		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___2.tres"],
-		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___2.tres"],
-	},
-	"slot3" : {
-		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___3.tres"],
-		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___3.tres"],
-	},
-	"slot4" : {
-		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___4.tres"],
-		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___4.tres"],
-	},
-	"slot5" : {
-		"rw1a" : ["res://resources/curves/airport1/path_taxi_1___5.tres"],
-		"rw1b" : ["res://resources/curves/airport1/path_taxi_2___5.tres"],
-	},
-}
-
-var ALIGN_BY_RW = {
-	"rw1a" : "res://resources/curves/airport1/path_align_1.tres",
-	"rw1b" : "res://resources/curves/airport1/path_align_2.tres",
-}
-
-var TAKEOFF_BY_RW = {
-	"rw1a" : "res://resources/curves/airport1/path_takeoff_1.tres",
-	"rw1b" : "res://resources/curves/airport1/path_takeoff_2.tres",
-}
-
-enum ParkingStatus {AVAILABLE, USED, UNAVAILABLE}
-
-var parking_slots_status = {
-	"slot1" : ParkingStatus.AVAILABLE,
-	"slot2" : ParkingStatus.AVAILABLE,
-	"slot3" : ParkingStatus.AVAILABLE,
-	"slot4" : ParkingStatus.AVAILABLE,
-	"slot5" : ParkingStatus.AVAILABLE,
-}
-
-func list_runway_to_select():
-	return SELECT_RUNWAY
-
-func get_available_parking_slot() -> String:
-	var availabe_slots: Array = []
-	for slot in parking_slots_status:
-		if parking_slots_status[slot] == ParkingStatus.AVAILABLE:
-			availabe_slots.append(slot)
-	
-	if availabe_slots.size() > 0:
-		var slot = availabe_slots[randi_range(0, availabe_slots.size() - 1)]
-		parking_slots_status[slot] = ParkingStatus.USED
-		return slot
-		
-	return ""
-
-func set_parking_slot_available(slot: String) -> void:
-	parking_slots_status[slot] = ParkingStatus.AVAILABLE
-
-func get_slot_pos(slot: String) -> Vector2:
-	return SELECT_PARKING[slot].global_position
+func select_runway_from_position(pos: Vector2):
+	return data.select_runway_from_position(pos)
 
 func change_visibility_of_all_runway_selectors(is_visible: bool) -> void:
-	for rw in SELECT_RUNWAY:
-		SELECT_RUNWAY[rw].visible = is_visible
+	data.change_visibility_of_all_runway_selectors(is_visible)
+
+func get_takeoff_pos(rw) -> Vector2:
+	return data.get_takeoff_pos(rw)
+
+func show_takeoff_point(rw) -> void:
+	data.show_takeoff_point(rw)
+	
+func hide_takeoff_point(rw) -> void:
+	data.hide_takeoff_point(rw)
+
+func get_taxi_pathes(slot, rw) -> Array:
+	return data.get_taxi_pathes(slot, rw)
+
+func get_align_path(rw) -> Path2D:
+	return data.get_align_path(rw)
+
+func get_takeoff_path(rw) -> Path2D:
+	return data.get_takeoff_path(rw)

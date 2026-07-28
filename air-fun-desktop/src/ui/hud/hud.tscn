@@ -42,4 +42,7 @@ script = ExtResource("2_udh2q")
 
 [node name="Message" type="Label" parent="MarginContainer" unique_id=245518310]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_type_variation = &"LabelSmall"
 script = ExtResource("3_udh2q")

@@ -31,8 +31,8 @@ func process_frame(delta: float) -> State:
 		curr_taxi_path += 1
 		var slot = context.parking_slot
 		context.airport.set_parking_slot_available(slot)
-		var rw = context.selected_runway_name
-		if curr_taxi_path == context.airport.TAXI_BY_SLOT_AND_RW[slot][rw].size():
+		var rw = context.selected_runway
+		if curr_taxi_path == context.airport.get_taxi_pathes(slot, rw).size():
 			plane.highlight(true)
 			next_state = ready_to_align
 		else:

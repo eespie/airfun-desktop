@@ -13,6 +13,7 @@ func get_plane_id():
 func _on_area_entered(area):
 	if area.get_plane_id() == plane_id:
 		EventBus.sigPlaneArrived.emit(plane_id) # Replace with function body.
+		EventBus.sigPlaneReleased.emit(plane_id) # Replace with function body.
 
 func set_color(color : Color):
 	target_image.modulate = color

@@ -11,12 +11,13 @@ var mouse_clicked: bool = false
 var next_state = null
 
 func enter() -> void:
-	var rw = context.selected_runway_name
-	var align_path = context.airport.ALIGN_BY_RW[rw]
-	var curve = ResourceLoader.load(align_path, "Curve2D")
-	path_2d.set_curve(curve)
+	var rw = context.selected_runway
+	var align_path = context.airport.get_align_path(rw)
+	path_2d.set_curve(align_path.curve)
 	path_follow_2d.set_progress(0)
 	plane.position = Vector2(0, 0)
+	var message = "Plane {0} ready to takeoff".format([context.plane_id])
+	EventBus.sigMessageDisplay.emit(message, context.plane_color)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneSelectedLong.connect(_on_plane_selected_long)

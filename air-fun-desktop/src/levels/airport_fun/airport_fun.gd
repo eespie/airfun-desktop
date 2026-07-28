@@ -54,7 +54,7 @@ func _on_new_plane_timer(wait: float):
 	
 func _on_plane_pop_timer_timeout() -> void:
 	var slot = airport.get_available_parking_slot()
-	if slot == "":
+	if slot == null:
 		# no avaliable slot
 		EventBus.sigNewPlaneTimer.emit(curves.get_takeoff_wait_time(plane_id))
 		return

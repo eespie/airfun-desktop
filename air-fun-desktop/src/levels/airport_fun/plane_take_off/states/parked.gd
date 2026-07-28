@@ -61,7 +61,7 @@ func _on_plane_select(is_selected: bool, id: int):
 func _on_mouse_button_clicked(mouse: Vector2):
 	match flight_plan:
 		FlightPlan.TARGET:
-			var departure_pos = airport.DEPARTURE_BY_RW[context.selected_runway_name].global_position
+			var departure_pos = airport.get_takeoff_pos(context.selected_runway)
 			if departure_pos.distance_to(mouse) < 32:
 				context.flight_curve = Curve2D.new()
 				context.flight_curve.clear_points()
@@ -72,9 +72,9 @@ func _on_mouse_button_clicked(mouse: Vector2):
 				
 		FlightPlan.RUNWAY:
 			_select_runway(mouse)
-			if context.selected_runway_name:
+			if context.selected_runway:
 				airport.change_visibility_of_all_runway_selectors(false)
-				airport.DEPARTURE_BY_RW[context.selected_runway_name].show()
+				airport.show_takeoff_point(context.selected_runway)
 				EventBus.sigPlaneSelect.emit(false, context.plane_id)
 				EventBus.sigTargetSelect.emit(true, context.plane_id)
 				flight_plan = FlightPlan.TARGET
@@ -99,7 +99,7 @@ func _on_mouse_drag(mouse: Vector2):
 		context.smooth_curve()
 		flight_plan = FlightPlan.READY
 		EventBus.sigTargetSelect.emit(false, context.plane_id)
-		airport.DEPARTURE_BY_RW[context.selected_runway_name].hide()
+		airport.hide_takeoff_point(context.selected_runway)
 		return
 		
 	if last_point.distance_to(mouse) < segment_length:
@@ -117,6 +117,6 @@ func _on_mouse_button_released(_mouse: Vector2):
 	flight_plan = FlightPlan.TARGET
 
 func _select_runway(mouse: Vector2) -> void:
-	for rw in airport.SELECT_RUNWAY:
-		if airport.SELECT_RUNWAY[rw].global_position.distance_to(mouse) < 32:
-			context.selected_runway_name = rw
+	var rw = airport.select_runway_from_position(mouse)
+	if rw:
+		context.selected_runway = rw

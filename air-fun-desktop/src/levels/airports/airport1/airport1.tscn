@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsceu7oq8274b" path="res://src/levels/airports/airport1/airport1.gd" id="1_85j0x"]
 [ext_resource type="Texture2D" uid="uid://dvt6e1qiik5mk" path="res://assets/2D/airport/airport1.png" id="1_c7kmv"]
+[ext_resource type="Script" uid="uid://n2iaueiwofwp" path="res://src/levels/airports/airport1/data.gd" id="2_ichja"]
 [ext_resource type="Texture2D" uid="uid://bww42xyls0w25" path="res://assets/2D/airport/arrows1.png" id="3_hqtqp"]
 [ext_resource type="Script" uid="uid://whdhwyeh2x3o" path="res://src/core/common/system/highlight.gd" id="4_6f51w"]
 [ext_resource type="Texture2D" uid="uid://dfc3tmw4jsgei" path="res://assets/2D/airport/parking.png" id="4_j545i"]
@@ -43,6 +44,33 @@ color_ramp = SubResource("Gradient_l2ntc")
 
 [node name="Airport1" type="Node2D" unique_id=125140555]
 script = ExtResource("1_85j0x")
+
+[node name="Data" type="Node" parent="." unique_id=1336936502 node_paths=PackedStringArray("select_parking_slot", "select_runway", "takeoff_point_by_runway", "path_align_by_runway", "path_takeoff_by_runway")]
+unique_name_in_owner = true
+script = ExtResource("2_ichja")
+select_parking_slot = {
+1: NodePath("../Root/Runway/ParkingSlots/ParkingSlot1"),
+2: NodePath("../Root/Runway/ParkingSlots/ParkingSlot2"),
+3: NodePath("../Root/Runway/ParkingSlots/ParkingSlot3"),
+4: NodePath("../Root/Runway/ParkingSlots/ParkingSlot4"),
+5: NodePath("../Root/Runway/ParkingSlots/ParkingSlot5")
+}
+select_runway = {
+1: NodePath("../Root/Runway/Side1/Start1"),
+2: NodePath("../Root/Runway/Side2/Start2")
+}
+takeoff_point_by_runway = {
+1: NodePath("../Root/Runway/Side1/Airborne1"),
+2: NodePath("../Root/Runway/Side2/Airborne2")
+}
+path_align_by_runway = {
+1: NodePath("../Path/Path Align 1"),
+2: NodePath("../Path/Path Align 2")
+}
+path_takeoff_by_runway = {
+1: NodePath("../Path/Path Takeoff 1"),
+2: NodePath("../Path/Path Takeoff 2")
+}
 
 [node name="Control" type="Control" parent="." unique_id=543261113]
 layout_mode = 3

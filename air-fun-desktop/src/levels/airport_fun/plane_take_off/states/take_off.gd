@@ -14,9 +14,9 @@ var next_state
 
 func enter() -> void:
 	next_state = null
-	var rw = context.selected_runway_name
-	var takeoff_path = context.airport.TAKEOFF_BY_RW[rw]
-	curve = ResourceLoader.load(takeoff_path, "Curve2D")
+	var rw = context.selected_runway
+	var takeoff_path: Path2D = context.airport.get_takeoff_path(rw)
+	curve = takeoff_path.curve
 	path_2d.set_curve(curve)
 	path_follow_2d.set_progress(0)
 	progress = 0

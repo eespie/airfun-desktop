@@ -16,12 +16,13 @@ func enter() -> void:
 	EventBus.sigPlaneSelect.emit(false, plane.plane_id)
 	plane.highlight(true)
 	var slot = context.parking_slot
-	var rw = context.selected_runway_name
-	var taxi_path = context.airport.TAXI_BY_SLOT_AND_RW[slot][rw][0]
-	var curve = ResourceLoader.load(taxi_path, "Curve2D")
-	path_2d.set_curve(curve)
+	var rw = context.selected_runway
+	var taxi_path: Path2D = context.airport.get_taxi_pathes(slot, rw)[0]
+	path_2d.set_curve(taxi_path.curve)
 	path_follow_2d.set_progress(0)
 	plane.position = Vector2(0, 0)
+	var message = "Plane {0} ready to taxi".format([context.plane_id])
+	EventBus.sigMessageDisplay.emit(message, context.plane_color)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneSelectedLong.connect(_on_plane_selected_long)
@@ -49,7 +50,6 @@ func _on_mouse_button_released(_mouse: Vector2):
 		return
 	mouse_clicked = false
 	EventBus.sigPlaneSelectLongStop.emit(plane.plane_id)
-	next_state = parked
 	
 func _on_plane_selected_long(id: int):
 	if id == context.plane_id:

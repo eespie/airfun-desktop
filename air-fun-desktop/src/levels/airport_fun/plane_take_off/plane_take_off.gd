@@ -17,9 +17,9 @@ func _ready():
 	_bind_events()
 	
 func _bind_events():
-	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
+	EventBus.sigPlaneReleased.connect(_on_plane_released)
 	
-func init(id: int, airport: Node2D, slot: String, plane_model: int, target_pos: Vector2)-> void:
+func init(id: int, airport: Node2D, slot: int, plane_model: int, target_pos: Vector2)-> void:
 	plane_id = id
 	plane.set_model(plane_model)
 	plane_info.init(id, airport, slot)
@@ -39,6 +39,7 @@ func _physics_process(delta):
 func _input(event):
 	state_machine.process_input(event)
 
-func _on_plane_arrived(id: int):
+func _on_plane_released(id: int):
 	if plane_id == id:
+		EventBus.sigAddScore.emit(1)
 		queue_free()

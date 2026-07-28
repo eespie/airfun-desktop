@@ -16,6 +16,7 @@ func enter() -> void:
 	path_follow_2d.set_progress(0)
 	progress = 0.0
 	plane.allow_collisions(true, false)
+	EventBus.sigPlaneTakeoff.emit(context.plane_id)
 
 	
 func exit() -> void:
