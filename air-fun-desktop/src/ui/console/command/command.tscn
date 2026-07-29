@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://djb1vlvm632gg"]
+
+[ext_resource type="Script" uid="uid://b674rprwe8elo" path="res://src/ui/console/command/command.gd" id="1_0v0bx"]
+
+[node name="Command" type="Control" unique_id=767637528]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0v0bx")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=267682885]
+layout_mode = 0
+offset_right = 380.0
+offset_bottom = 30.0
+
+[node name="LineContent" type="HBoxContainer" parent="PanelContainer" unique_id=2091195052]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlaneInfo" type="Button" parent="PanelContainer/LineContent" unique_id=342586716]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 15
+text = "Plane 100"
+
+[node name="Description" type="Label" parent="PanelContainer/LineContent" unique_id=984587019]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+mouse_filter = 0
+theme_type_variation = &"LabelSmall"
+theme_override_font_sizes/font_size = 15
+text = "Ready to takeoff"
+vertical_alignment = 1
+
+[node name="ElapsedTime" type="Label" parent="PanelContainer/LineContent" unique_id=1574584334]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_type_variation = &"LabelSmall"
+theme_override_font_sizes/font_size = 15
+text = "00:00"
+horizontal_alignment = 2
+
+[node name="Process" type="Button" parent="PanelContainer/LineContent" unique_id=148908190]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 15
+text = "Proceed"
+
+[connection signal="pressed" from="PanelContainer/LineContent/PlaneInfo" to="." method="_on_plane_info_pressed"]
+[connection signal="pressed" from="PanelContainer/LineContent/Process" to="." method="_on_process_pressed"]

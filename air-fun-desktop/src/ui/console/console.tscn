@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://drk6tmp53kfil"]
+
+[ext_resource type="Script" uid="uid://c16epyvkm4ouc" path="res://src/ui/console/console.gd" id="1_1khpr"]
+
+[node name="Console" type="Control" unique_id=253173096]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1khpr")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1720278163]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -398.0
+offset_top = -370.5
+offset_right = 2.0
+offset_bottom = 369.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CommandList" type="VBoxContainer" parent="MarginContainer" unique_id=215499037]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 35

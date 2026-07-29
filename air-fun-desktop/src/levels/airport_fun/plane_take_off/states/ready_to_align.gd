@@ -16,16 +16,17 @@ func enter() -> void:
 	path_2d.set_curve(align_path.curve)
 	path_follow_2d.set_progress(0)
 	plane.position = Vector2(0, 0)
-	var message = "Plane {0} ready to takeoff".format([context.plane_id])
-	EventBus.sigMessageDisplay.emit(message, context.plane_color)
+	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Ready to takeoff", EventBus.sigCommandTakeoff)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneSelectedLong.connect(_on_plane_selected_long)
+	EventBus.sigCommandTakeoff.connect(_on_command_takeoff)
 	
 func exit() -> void:
 	EventBus.sigMouseButtonClicked.disconnect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.disconnect(_on_mouse_button_released)
 	EventBus.sigPlaneSelectedLong.disconnect(_on_plane_selected_long)
+	EventBus.sigCommandTakeoff.disconnect(_on_command_takeoff)
 	
 func process_frame(_delta: float) -> State:
 	return next_state
@@ -43,6 +44,12 @@ func _on_mouse_button_released(_mouse: Vector2):
 	mouse_clicked = false
 	EventBus.sigPlaneSelectLongStop.emit(plane.plane_id)
 	
-func _on_plane_selected_long(id: int):
+func _on_plane_selected_long(id: int) -> void:
 	if id == context.plane_id:
+		EventBus.sigConsoleRemoveCommand.emit(context.plane_id)
+		next_state = align
+
+func _on_command_takeoff(id: int) -> void:
+	if id == context.plane_id:
+		plane.highlight(false)
 		next_state = align

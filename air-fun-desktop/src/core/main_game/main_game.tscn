@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bh4ilu3n5jjji" path="res://src/core/main_game/main_game.gd" id="1_3fed5"]
 [ext_resource type="Script" uid="uid://clgoaajvukq8w" path="res://src/core/common/system/curves.gd" id="2_6yl8a"]
+[ext_resource type="PackedScene" uid="uid://drk6tmp53kfil" path="res://src/ui/console/console.tscn" id="3_6n4xl"]
 
 [sub_resource type="Curve" id="Curve_ccjeu"]
 _limits = [0.6, 1.0, 0.0, 1.0]
@@ -26,6 +27,7 @@ process_mode = 1
 unique_name_in_owner = true
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1523712733]
+unique_name_in_owner = true
 process_mode = 1
 layer = 10
 
@@ -38,6 +40,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Console" parent="HudLayer" unique_id=1823968145 instance=ExtResource("3_6n4xl")]
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=264368496]
 process_mode = 2

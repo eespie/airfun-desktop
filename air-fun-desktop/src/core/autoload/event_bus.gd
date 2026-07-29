@@ -22,7 +22,6 @@ extends Node
 @warning_ignore("unused_signal") signal sigPlaneReleased(id :int)
 @warning_ignore("unused_signal") signal sigPlaneTakeoff(id :int)
 
-
 @warning_ignore("unused_signal") signal sigPlaneSelect(selected :bool, id :int)
 @warning_ignore("unused_signal") signal sigPlaneSelectLongStart(id :int)
 @warning_ignore("unused_signal") signal sigPlaneSelectLongStop(id :int)
@@ -38,3 +37,12 @@ extends Node
 @warning_ignore("unused_signal") signal sigMouseMove(pos :Vector2)
 @warning_ignore("unused_signal") signal sigMouseButtonClicked(pos :Vector2)
 @warning_ignore("unused_signal") signal sigMouseButtonReleased(pos :Vector2)
+
+# Console
+@warning_ignore("unused_signal") signal sigConsoleAddCommand(id: int, color: Color, command: String, sig: Signal)
+@warning_ignore("unused_signal") signal sigConsoleRemoveCommand(id :int)
+
+# Command
+@warning_ignore("unused_signal") signal sigCommandTaxi(id: int)
+@warning_ignore("unused_signal") signal sigCommandTakeoff(id: int)
+@warning_ignore("unused_signal") signal sigCommandFlightPlan(id: int)
