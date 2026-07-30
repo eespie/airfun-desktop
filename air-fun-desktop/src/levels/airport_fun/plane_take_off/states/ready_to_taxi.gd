@@ -21,7 +21,7 @@ func enter() -> void:
 	path_2d.set_curve(taxi_path.curve)
 	path_follow_2d.set_progress(0)
 	plane.position = Vector2(0, 0)
-	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Ready to taxi", EventBus.sigCommandTaxi)
+	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Ready to taxi", "Taxi", "Taxiing", EventBus.sigCommandTaxi)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneSelectedLong.connect(_on_plane_selected_long)
@@ -54,10 +54,10 @@ func _on_mouse_button_released(_mouse: Vector2):
 	
 func _on_plane_selected_long(id: int):
 	if id == context.plane_id:
-		EventBus.sigConsoleRemoveCommand.emit(context.plane_id)
 		next_state = taxi
 
 func _on_command_taxi(id: int):
 	if id == context.plane_id:
+		EventBus.sigPlaneSelect.emit(false, id)
 		plane.highlight(false)
 		next_state = taxi

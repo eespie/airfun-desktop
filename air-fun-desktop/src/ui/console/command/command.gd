@@ -1,24 +1,30 @@
 extends Control
 
 @onready var plane_info: Button = %"PlaneInfo"
-@onready var description: Label = %Description
+@onready var description: Button = %Description
 @onready var elapsed_time: Label = %ElapsedTime
+@onready var process: Button = %Process
 
 var plane_id: int
 var command_signal: Signal
+var post_cmd_description: String
 var start_time
 
-func set_command(id: int, color: Color, command: String, sig: Signal) -> void:
+func set_command(id: int, color: Color, desc: String, cmd: String, post_desc: String, sig: Signal) -> void:
 	plane_id = id
 	plane_info.text = "Plane " + str(plane_id)
 	plane_info.modulate = color
-	description.text = command
+	description.text = desc
 	command_signal = sig
+	process.text = cmd
+	post_cmd_description = post_desc
 	start_time = Time.get_ticks_msec()
 	
 func _on_process_pressed() -> void:
 	command_signal.emit(plane_id)
-	EventBus.sigConsoleRemoveCommand.emit(plane_id)
+	process.disabled = true
+	description.disabled = true
+	description.text = post_cmd_description
 
 func _on_plane_info_pressed() -> void:
 	EventBus.sigPlaneUnselectAll.emit()

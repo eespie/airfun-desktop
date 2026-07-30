@@ -24,15 +24,14 @@ theme_type_variation = &"FlatButton"
 theme_override_font_sizes/font_size = 15
 text = "Plane 100"
 
-[node name="Description" type="Label" parent="PanelContainer/LineContent" unique_id=984587019]
+[node name="Description" type="Button" parent="PanelContainer/LineContent" unique_id=1098849924]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
-mouse_filter = 0
-theme_type_variation = &"LabelSmall"
+theme_type_variation = &"FlatButton"
 theme_override_font_sizes/font_size = 15
 text = "Ready to takeoff"
-vertical_alignment = 1
+alignment = 0
 
 [node name="ElapsedTime" type="Label" parent="PanelContainer/LineContent" unique_id=1574584334]
 unique_name_in_owner = true
@@ -44,6 +43,7 @@ text = "00:00"
 horizontal_alignment = 2
 
 [node name="Process" type="Button" parent="PanelContainer/LineContent" unique_id=148908190]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_vertical = 0

@@ -29,7 +29,7 @@ func enter() -> void:
 	plane.global_position = context.get_slot_pos()
 	plane.highlight(true)
 	plane.allow_collisions(true, true)
-	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Prepare flight plan", EventBus.sigCommandFlightPlan)
+	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Prepare flight plan", "Prepare", "Preparing", EventBus.sigCommandFlightPlan)
 	EventBus.sigPlaneSelect.connect(_on_plane_select)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseDrag.connect(_on_mouse_drag)
@@ -59,7 +59,6 @@ func process_frame(_delta: float) -> State:
 
 func _on_plane_select(is_selected: bool, id: int) -> void:
 	if not is_selected and context.plane_id == id and flight_plan == FlightPlan.PLANE:
-		EventBus.sigConsoleRemoveCommand.emit(context.plane_id)
 		plane.highlight(true)
 		
 func _on_command_flight_plan(id: int) -> void:

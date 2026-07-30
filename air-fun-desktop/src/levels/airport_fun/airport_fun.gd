@@ -33,6 +33,7 @@ func _bind_events() -> void:
 	EventBus.sigNewPlaneTimer.connect(_on_new_plane_timer)
 	EventBus.sigPlaneUnselectAll.connect(_on_unselect_all_planes)
 	EventBus.sigPlaneCrashed.connect(_on_plane_crashed)
+	EventBus.sigPlaneArrived.connect(_on_plane_arrived)
 
 func _on_mouse_drag(mouse_pos: Vector2i):
 	self.mouse.position = mouse_pos
@@ -53,10 +54,14 @@ func _on_new_plane_timer(wait: float):
 	plane_pop_timer.start(wait)
 	
 func _on_plane_pop_timer_timeout() -> void:
+	if plane_count > 14:
+		EventBus.sigNewPlaneTimer.emit(randf() * curves.get_takeoff_wait_time(plane_id))
+		return
+		
 	var slot = airport.get_available_parking_slot()
 	if slot == null:
 		# no avaliable slot
-		EventBus.sigNewPlaneTimer.emit(curves.get_takeoff_wait_time(plane_id))
+		EventBus.sigNewPlaneTimer.emit(randf() * curves.get_takeoff_wait_time(plane_id))
 		return
 	
 	plane_id += 1
@@ -69,11 +74,11 @@ func _on_plane_pop_timer_timeout() -> void:
 	
 	EventBus.sigNewPlaneTimer.emit(curves.get_takeoff_wait_time(plane_id))
 
-func _on_unselect_all_planes():
+func _on_unselect_all_planes() -> void:
 	for id in range(1, plane_id + 1):
 		EventBus.sigPlaneSelect.emit(false, id)
 
-func _on_plane_crashed(_id: int):
+func _on_plane_crashed(_id: int) -> void:
 	if game_over_timer.is_stopped():
 		game_over_timer.start(0.5)
 	
@@ -93,3 +98,6 @@ func _get_target_pos() -> Vector2:
 		return Vector2(randi_range(100, 1820), 980)
 	# right
 	return Vector2(100, randi_range(150, 980))
+
+func _on_plane_arrived(_id: int) -> void:
+	plane_count -= 1

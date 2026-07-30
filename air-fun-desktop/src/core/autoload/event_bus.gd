@@ -39,7 +39,7 @@ extends Node
 @warning_ignore("unused_signal") signal sigMouseButtonReleased(pos :Vector2)
 
 # Console
-@warning_ignore("unused_signal") signal sigConsoleAddCommand(id: int, color: Color, command: String, sig: Signal)
+@warning_ignore("unused_signal") signal sigConsoleAddCommand(id: int, color: Color, description: String, command: String, post_desc: String, sig: Signal)
 @warning_ignore("unused_signal") signal sigConsoleRemoveCommand(id :int)
 
 # Command
