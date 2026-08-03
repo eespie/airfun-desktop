@@ -5,7 +5,6 @@ extends State
 @onready var path_follow_2d: PathFollow2D = %PathFollow2D
 
 # States
-@onready var ready_to_align: State = %ReadyToAlign
 @onready var runway_crossing: State = %RunwayCrossing
 
 var next_state
@@ -32,10 +31,7 @@ func process_frame(delta: float) -> State:
 		var slot = context.parking_slot
 		context.airport.set_parking_slot_available(slot)
 		var rw = context.selected_runway
-		if curr_taxi_path == context.airport.get_taxi_pathes(slot, rw).size():
-			plane.highlight(true)
-			next_state = ready_to_align
-		else:
+		if curr_taxi_path != context.airport.get_taxi_pathes(slot, rw).size():
 			context.curr_taxi_path = curr_taxi_path
 			next_state = runway_crossing
 

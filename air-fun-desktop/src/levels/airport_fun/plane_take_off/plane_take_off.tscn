@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://bt7v65ox47bam" path="res://src/levels/airport_fun/plane_take_off/plane_info.gd" id="2_4qt1b"]
 [ext_resource type="Script" uid="uid://bv71m3sgutdao" path="res://src/core/common/fsm/state_machine.gd" id="2_bbg5g"]
 [ext_resource type="Script" uid="uid://qlvy26uewffy" path="res://src/levels/airport_fun/plane_take_off/states/parked.gd" id="3_4qt1b"]
-[ext_resource type="Script" uid="uid://dj8uoiator758" path="res://src/levels/airport_fun/plane_take_off/states/ready_to_fly.gd" id="4_ei6ur"]
+[ext_resource type="Script" uid="uid://m7aw8gnjj6go" path="res://src/core/common/fsm/state.gd" id="4_g41d6"]
 [ext_resource type="Script" uid="uid://biv2p1vx54fqb" path="res://src/levels/airport_fun/plane_take_off/states/taxi.gd" id="5_b16j2"]
 [ext_resource type="Script" uid="uid://dgekg5ayaex7v" path="res://src/levels/airport_fun/plane_take_off/states/ready_to_taxi.gd" id="7_4c65u"]
 [ext_resource type="Texture2D" uid="uid://bxopoqnvjjhc5" path="res://assets/2D/trajectory.png" id="7_h4202"]
 [ext_resource type="Script" uid="uid://bidy2irtha55d" path="res://src/levels/airport_fun/plane_take_off/states/ready_to_align.gd" id="8_ipgeo"]
-[ext_resource type="Script" uid="uid://beuvh4nijyofq" path="res://src/levels/airport_fun/plane_take_off/states/runway_crossing.gd" id="9_61n7s"]
+[ext_resource type="Script" uid="uid://beuvh4nijyofq" path="res://src/levels/airport_fun/common/states/runway_crossing.gd" id="9_61n7s"]
 [ext_resource type="Texture2D" uid="uid://f4nslmp2rwdn" path="res://assets/2D/crosshair062.png" id="9_ipgeo"]
 [ext_resource type="Texture2D" uid="uid://buhn1ai7y1mie" path="res://assets/2D/warning.png" id="10_61n7s"]
 [ext_resource type="Script" uid="uid://c303fraujj6ew" path="res://src/levels/airport_fun/plane_take_off/states/align.gd" id="10_q3hu8"]
@@ -35,26 +35,23 @@ unique_name_in_owner = true
 script = ExtResource("2_bbg5g")
 initial_state = NodePath("New")
 
+[node name="New" type="Node" parent="StateMachine" unique_id=786561629]
+unique_name_in_owner = true
+script = ExtResource("4_g41d6")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
 [node name="Parked" type="Node" parent="StateMachine" unique_id=1666793388]
 unique_name_in_owner = true
 script = ExtResource("3_4qt1b")
-
-[node name="ReadyToFly" type="Node" parent="StateMachine" unique_id=338753505]
-unique_name_in_owner = true
-script = ExtResource("4_ei6ur")
-
-[node name="Taxi" type="Node" parent="StateMachine" unique_id=665003015]
-unique_name_in_owner = true
-script = ExtResource("5_b16j2")
-
-[node name="New" type="Node" parent="StateMachine" unique_id=1403654948]
-unique_name_in_owner = true
-script = ExtResource("5_b16j2")
 
 [node name="ReadyToTaxi" type="Node" parent="StateMachine" unique_id=385962132]
 unique_name_in_owner = true
 script = ExtResource("7_4c65u")
 metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="Taxi" type="Node" parent="StateMachine" unique_id=665003015]
+unique_name_in_owner = true
+script = ExtResource("5_b16j2")
 
 [node name="ReadyToAlign" type="Node" parent="StateMachine" unique_id=3444593]
 unique_name_in_owner = true

@@ -16,7 +16,7 @@ func enter() -> void:
 	path_2d.set_curve(align_path.curve)
 	path_follow_2d.set_progress(0)
 	plane.position = Vector2(0, 0)
-	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Ready to take-off", "Take-off", "flying", EventBus.sigCommandTakeoff)
+	EventBus.sigConsoleAddCommand.emit(context.plane_id, context.plane_color, "Ready to takeoff", "Takeoff", "Cleared for Takeoff", EventBus.sigCommandTakeoff)
 	EventBus.sigMouseButtonClicked.connect(_on_mouse_button_clicked)
 	EventBus.sigMouseButtonReleased.connect(_on_mouse_button_released)
 	EventBus.sigPlaneSelectedLong.connect(_on_plane_selected_long)

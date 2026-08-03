@@ -17,6 +17,7 @@ const GAME_MODES = {
 }
 
 var is_paused : bool = false
+var is_game_over: bool = false
 
 @export var initial_wait_time :float = 0.5
 
@@ -40,11 +41,8 @@ func _bind_events() -> void:
 	EventBus.sigPause.connect(_on_game_paused)
 	
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if mouse_state == mouse_states.CLICKED:
-			EventBus.sigMouseDrag.emit(event.position)
-		else:
-			EventBus.sigMouseMove.emit(event.position)
+	if event is InputEventMouseMotion and mouse_state == mouse_states.CLICKED:
+		EventBus.sigMouseDrag.emit(event.position)
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			mouse_state = mouse_states.CLICKED
@@ -52,7 +50,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			mouse_state = mouse_states.RELEASED
 			EventBus.sigMouseButtonReleased.emit(event.position)
-	if event.is_action_released("Pause"):
+	if event.is_action_released("Pause") and not is_game_over:
 		EventBus.sigPause.emit(not is_paused)
 		
 func init_level(game):
@@ -80,6 +78,7 @@ func _on_game_paused(paused : bool):
 
 
 func _on_game_over() -> void:
+	is_game_over = true
 	EventBus.sigPause.emit(true)
 	pause_root.hide()
 	game_over_root.show()

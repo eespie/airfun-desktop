@@ -14,5 +14,5 @@ func get_pulse() -> float:
 func get_takeoff_speed(offset: float) ->float:
 	return takeoff_curve.sample_baked(offset)
 
-func get_takeoff_wait_time(plane_number: int) -> float:
+func get_next_plane_wait_time(plane_number: int) -> float:
 	return 10.0 + takeoff_wait_time_curve.sample_baked(plane_number / 2.0)

@@ -105,7 +105,7 @@ func _on_mouse_drag(mouse: Vector2):
 	if flight_plan != FlightPlan.TARGET_DRAW:
 		return
 	
-		# Mouse arrive on target
+	# Mouse arrive on target
 	if target.position.distance_to(mouse) < 32:
 		context.flight_curve.add_point(target.position)
 		context.smooth_curve()

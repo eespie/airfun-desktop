@@ -42,6 +42,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Console" parent="HudLayer" unique_id=1823968145 instance=ExtResource("3_6n4xl")]
+mouse_filter = 1
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=264368496]
 process_mode = 2

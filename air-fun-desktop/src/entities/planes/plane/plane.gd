@@ -15,12 +15,13 @@ const PLANE_MODELS = [A_321, A_380, CONCORDE, Q_400]
 var plane_id :int = 0
 var plane_model
 var plane_speed : float
+var is_selected: bool = false
 
 func _ready() -> void:
 	_bind_events()
 	
 func _bind_events():
-	pass
+	EventBus.sigPlaneSelect.connect(_on_plane_selected)
 	
 func set_plane_id(id: int):
 	plane_id = id
@@ -48,3 +49,7 @@ func highlight(flag : bool):
 		highlight_plane.show()
 	else:
 		highlight_plane.hide()
+
+func _on_plane_selected(selected :bool, id :int) -> void:
+	if plane_id == id:
+		is_selected = selected

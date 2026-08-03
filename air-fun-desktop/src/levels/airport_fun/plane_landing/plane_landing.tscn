@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://c2tp0fgfdmyws"]
+
+[ext_resource type="Script" uid="uid://bv71m3sgutdao" path="res://src/core/common/fsm/state_machine.gd" id="1_fea52"]
+[ext_resource type="Script" uid="uid://iorqf1f62pnp" path="res://src/levels/airport_fun/plane_landing/plane_landing.gd" id="1_r0ysy"]
+[ext_resource type="Script" uid="uid://m7aw8gnjj6go" path="res://src/core/common/fsm/state.gd" id="2_pl6d5"]
+[ext_resource type="Script" uid="uid://dfaydc80yej68" path="res://src/levels/airport_fun/plane_landing/plane_info.gd" id="2_qcyd5"]
+[ext_resource type="PackedScene" uid="uid://c4qclj41y431i" path="res://src/entities/planes/plane/plane.tscn" id="3_r0ysy"]
+[ext_resource type="PackedScene" uid="uid://d3i24frqtvmu5" path="res://src/core/common/system/curves.tscn" id="4_pl6d5"]
+[ext_resource type="Script" uid="uid://ddhkutk2icsrl" path="res://src/levels/airport_fun/plane_landing/states/waiting_to_land.gd" id="4_rvv4f"]
+[ext_resource type="Script" uid="uid://86saet846cbw" path="res://src/levels/airport_fun/plane_landing/states/landing.gd" id="5_sfaip"]
+[ext_resource type="Script" uid="uid://0w6crtj1mcqg" path="res://src/levels/airport_fun/plane_landing/states/touchdown.gd" id="6_yo4km"]
+[ext_resource type="Script" uid="uid://ccgnxe1y70eqn" path="res://src/levels/airport_fun/plane_landing/states/taxi.gd" id="7_qcyd5"]
+[ext_resource type="Script" uid="uid://beuvh4nijyofq" path="res://src/levels/airport_fun/common/states/runway_crossing.gd" id="8_yo4km"]
+[ext_resource type="Texture2D" uid="uid://bxopoqnvjjhc5" path="res://assets/2D/trajectory.png" id="10_788as"]
+
+[sub_resource type="Curve2D" id="Curve2D_rvv4f"]
+
+[node name="PlaneLanding" type="Node2D" unique_id=350486805]
+script = ExtResource("1_r0ysy")
+
+[node name="PlaneInfo" type="Node" parent="." unique_id=1255848091]
+unique_name_in_owner = true
+script = ExtResource("2_qcyd5")
+
+[node name="StateMachine" type="Node" parent="." unique_id=968909866 node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("1_fea52")
+initial_state = NodePath("New")
+metadata/_custom_type_script = "uid://bv71m3sgutdao"
+
+[node name="New" type="Node" parent="StateMachine" unique_id=1620500296]
+script = ExtResource("2_pl6d5")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="WaitingToLand" type="Node" parent="StateMachine" unique_id=278406883]
+unique_name_in_owner = true
+script = ExtResource("4_rvv4f")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="Landing" type="Node" parent="StateMachine" unique_id=1606628289]
+unique_name_in_owner = true
+script = ExtResource("5_sfaip")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="Touchdown" type="Node" parent="StateMachine" unique_id=2091238320]
+unique_name_in_owner = true
+script = ExtResource("6_yo4km")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="Taxi" type="Node" parent="StateMachine" unique_id=1258054422]
+unique_name_in_owner = true
+script = ExtResource("7_qcyd5")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="RunwayCrossing" type="Node" parent="StateMachine" unique_id=990867203]
+unique_name_in_owner = true
+script = ExtResource("8_yo4km")
+metadata/_custom_type_script = "uid://m7aw8gnjj6go"
+
+[node name="Trajectory" type="Line2D" parent="." unique_id=1371215829]
+unique_name_in_owner = true
+texture_repeat = 2
+width = 25.0
+texture = ExtResource("10_788as")
+texture_mode = 1
+
+[node name="Path2D" type="Path2D" parent="." unique_id=892142883]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_rvv4f")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=468217436]
+unique_name_in_owner = true
+
+[node name="Plane" parent="Path2D/PathFollow2D" unique_id=1659998964 instance=ExtResource("3_r0ysy")]
+unique_name_in_owner = true
+
+[node name="Curves" parent="." unique_id=1083773608 instance=ExtResource("4_pl6d5")]
+unique_name_in_owner = true

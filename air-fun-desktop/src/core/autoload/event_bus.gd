@@ -34,7 +34,6 @@ extends Node
 
 # Mouse
 @warning_ignore("unused_signal") signal sigMouseDrag(pos :Vector2)
-@warning_ignore("unused_signal") signal sigMouseMove(pos :Vector2)
 @warning_ignore("unused_signal") signal sigMouseButtonClicked(pos :Vector2)
 @warning_ignore("unused_signal") signal sigMouseButtonReleased(pos :Vector2)
 
@@ -46,3 +45,4 @@ extends Node
 @warning_ignore("unused_signal") signal sigCommandTaxi(id: int)
 @warning_ignore("unused_signal") signal sigCommandTakeoff(id: int)
 @warning_ignore("unused_signal") signal sigCommandFlightPlan(id: int)
+@warning_ignore("unused_signal") signal sigCommandCrossRunway(id: int)
